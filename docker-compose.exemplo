@@ -1,17 +1,17 @@
-version: '2'
+version: '3'
 services:
 
   webapp-service:
-    image: node:8.11.4-slim
+    image: node:lts
     container_name: app-webapp
     user: "node"
     working_dir: /home/node/app
     volumes:
       - ./webapp:/home/node/app
-    command:
-      sh -c 'npm run serve'
-      #      sh -c 'npm run lint && npm run serve'
-      # sh -c 'npm i && npm run serve'
+    command: 
+       sh -c 'npm start'
+      #      sh -c 'npm run lint && npm run start'
+      # sh -c 'npm i && npm run start'
     ports:
       - "8080:8080"
     environment:
@@ -22,14 +22,14 @@ services:
 
   api-service:
     container_name: app-api
-    # build: .
+    build: .
     image: culturagovbr/notification-php-fpm:1.0.1
     working_dir: /application
     volumes:
       - ./api:/application
       - ./docker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
     environment:
-      # - UPDATE_COMPOSER_DEPENDENCIES=true
+      - UPDATE_COMPOSER_DEPENDENCIES=true
       - USE_PHP_FPM=true
       - DB_CONNECTION=pgsql
       - DB_HOST=app-database

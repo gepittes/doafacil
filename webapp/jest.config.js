@@ -1,3 +1,4 @@
+/* eslint-disable */
 module.exports = {
   moduleFileExtensions: ['js', 'jsx', 'json', 'vue'],
   transform: {

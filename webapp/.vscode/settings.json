@@ -1,0 +1,15 @@
+{
+  "eslint.workingDirectories": ["./src"],
+  "prettier.printWidth": 120,
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "editor.rulers": [120],
+  "editor.tabCompletion": "on",
+  "breadcrumbs.enabled": true,
+  "explorer.compactFolders": false,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}

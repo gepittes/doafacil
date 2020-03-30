@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint --fix",
     "lint-fix": "vue-cli-service lint --fix --ext .js",
-    "test:unit": "vue-cli-service test:unit",
     "lint:dev": "eslint src",
-    "lint:watch": "watch 'npm run lint' ."
+    "lint:watch": "watch 'npm run lint' .",
+    "start": "vue-cli-service serve"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",

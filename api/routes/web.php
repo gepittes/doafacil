@@ -4,17 +4,9 @@ $router->get('/', function () use ($router) {
     return redirect()->route('api');
 });
 
-$router->get('/api', ['as' => 'api', function () use ($router) {
-    return response()->json(
-        [
-            'name' => 'Abigail',
-            'state' => 'CA'
-        ]
-    );
-}]);
-
 define('API_VERSION', '1.0');
 $apiPattern = 'v1';
+
 $router->group(['prefix' => $apiPattern], function () use ($router) {
 
     $router->post('/autenticacao/login', 'AutenticacaoController@post');
@@ -56,6 +48,5 @@ $router->group(['prefix' => $apiPattern], function () use ($router) {
     });
 
     $router->group(['middleware' => 'jwt.auth'], function () use ($router) {
-
     });
 });

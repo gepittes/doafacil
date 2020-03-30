@@ -4,9 +4,10 @@
 
 <script>
 import mapboxgl from 'mapbox-gl';
+
 export default {
   name: 'mapbox-full',
-  data() {
+  data () {
     return {
       token:
         'pk.eyJ1IjoiZ2FicmllbHJtcyIsImEiOiJjazFzbDBubjAwaDZoM2JwNGRxcmxjY25yIn0.dhif7znIWxyQLfbAGkfFIw',
@@ -20,7 +21,7 @@ export default {
   },
 
   methods: {
-    startMap() {
+    startMap () {
       mapboxgl.accessToken = this.token;
 
       this.map = new mapboxgl.Map({
@@ -34,15 +35,15 @@ export default {
       this.configureControlsMap();
     },
 
-    configureGeolocation() {
-      // this.geocoder = new MapboxGeocoder({
-      //   accessToken: mapboxgl.accessToken,
-      //   mapboxgl: mapboxgl,
-      //   placeholder: 'Pesquise Ex: Brasil ...',
-      // })
+    configureGeolocation () {
+      this.geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl,
+        placeholder: 'Pesquise Ex: Brasil ...',
+      })
     },
 
-    configureControlsMap() {
+    configureControlsMap () {
       this.map.addControl(this.geocoder, 'top-left');
       this.map.addControl(new mapboxgl.NavigationControl());
       this.map.addControl(
@@ -55,7 +56,7 @@ export default {
       );
     },
 
-    markerLocationWithSearch() {
+    markerLocationWithSearch () {
       this.map.on('load', () => {
         this.geocoder.on('result', (ev) => {
           let marker = {
@@ -70,7 +71,7 @@ export default {
       });
     },
 
-    markerLocationWithClick() {
+    markerLocationWithClick () {
       this.map.on('click', (e) => {
         let marker = {
           longitude: e.lngLat.lng.toFixed(3),
@@ -83,7 +84,7 @@ export default {
       });
     },
 
-    clearMakers() {
+    clearMakers () {
       let currentMaker = document.querySelectorAll('.mapboxgl-marker');
 
       if (currentMaker.length > 0) {
@@ -93,17 +94,17 @@ export default {
       }
     },
 
-    addMakerMap({ longitude, latitude }) {
+    addMakerMap ({ longitude, latitude }) {
       new mapboxgl.Marker().setLngLat([longitude, latitude]).addTo(this.map);
     },
 
-    setLocation(location) {
+    setLocation (location) {
       Object.assign(this.localizacao, location);
       this.$emit('localizacao', this.localizacao);
     }
   },
 
-  mounted() {
+  mounted () {
     this.startMap();
     this.markerLocationWithSearch();
     this.markerLocationWithClick();

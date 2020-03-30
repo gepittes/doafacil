@@ -21,7 +21,7 @@ export default {
   data: function () {
     return {
       images: {
-        // main: require("@/assets/home/union-hands.jpg")
+        main: require("../../../assets/img/union-hands.jpg"),
         // logo: require('@/assets/doafacil/logos/logo-doafacil.png'),
       }
     };

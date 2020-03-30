@@ -1,8 +1,8 @@
+import '@babel/polyfill';
 import './app/config/plugins/doafacil';
-import './app/config/plugins/bootstrap';
 import './app/config/plugins/mapbox';
 import vuetify from './app/config/plugins/vuetify';
-import '@babel/polyfill';
+
 import Vue from 'vue';
 import App from './app/layouts/App';
 import router from './app/config/navigation/router';

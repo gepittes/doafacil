@@ -21,8 +21,9 @@ $router->group(['prefix' => $apiPattern], function () use ($router) {
     });
 
     $router->group(['namespace' => 'Evento'], function () use ($router) {
-        $router->get('/evento/inistituicao/{id}', 'EventoController@getEventosByInsti');
         $router->get('/evento', 'EventoController@get');
+        $router->get('/evento/{id}', 'EventoController@get');
+        $router->get('/evento/inistituicao/{id}', 'EventoController@getEventosByInsti');
         $router->post('/evento', 'EventoController@post');
         $router->patch('/evento/{id}', 'EventoController@patch');
         $router->delete('/evento/{id}', 'EventoController@delete');
@@ -50,3 +51,4 @@ $router->group(['prefix' => $apiPattern], function () use ($router) {
     $router->group(['middleware' => 'jwt.auth'], function () use ($router) {
     });
 });
+// 

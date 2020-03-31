@@ -39,10 +39,11 @@
   </v-app>
 
 </template>
+
 <script>
-import MeuCadastro from '../conta/MeuCadastro.vue'
+import MeuCadastro from '@/app/modules/conta/conta-perfil/MeuCadastro.vue'
 import { mapGetters, mapActions } from 'vuex'
-import Instituicao from '../../components/instituicao/Instituicao'
+import Instituicao from '@/app/modules/instituicao/instituicao-card/InstituiicaoCard.vue'
 
 export default {
   name: 'Configuracao',

@@ -8,6 +8,7 @@ import Pontos from './../../modules/ponto/ponto-list/Pontos.vue';
 import PontoPerfil from '../../modules/ponto/ponto-perfil/Perfil.vue';
 import Home from './../../../app/modules/home/Home.vue';
 import Conta from '../../modules/conta/conta-list/Conta.vue';
+import Configuracao from '@/app/modules/instituicao/Configuracao.vue';
 import store from './../settings/store';
 import Main from './../../../app/modules/home/Main.vue';
 import { obterInformacoesJWT } from '../../modules/account/_helpers/jwt';
@@ -59,6 +60,14 @@ const routesObject = [
     name: 'instituicoes',
     meta: {
       title: 'instituicoes'
+    }
+  },
+  {
+    path: '/configuracao',
+    component: Configuracao,
+    name: 'configuracao',
+    meta: {
+      title: 'Configuração da Conta'
     }
   },
   {

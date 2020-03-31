@@ -22,8 +22,8 @@ class CreateEventosTable extends Migration
             $table->string('longitude')->nullable();
             $table->string('latitude')->nullable();
             $table->string('image')->nullable();
-            $table->unsignedBigInteger('fk_insti_id');
-            $table->foreign('fk_insti_id')
+            $table->unsignedBigInteger('instituicao_id');
+            $table->foreign('instituicao_id')
                 ->references('id')->on('app.instituicao');
             $table->timestamps();
         });

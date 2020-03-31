@@ -212,7 +212,7 @@ export default {
       this.submitted = true;
 
       if (this.$refs.form.validate()) {
-        this.evento.fk_insti_id = this.instituicaoSelect.id;
+        this.evento.instituicao_id = this.instituicaoSelect.id;
 
         if (this.evento.id) {
           this.atualizarEvento(this.evento);

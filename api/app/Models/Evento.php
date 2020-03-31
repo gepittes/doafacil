@@ -21,7 +21,7 @@ class Evento extends Model
             $evento->longitude = $request['localizacao']['longitude'];
             $evento->latitude = $request['localizacao']['latitude'];
         }
-        $evento->fk_insti_id = $request['fk_insti_id'];
+        $evento->instituicao_id = $request['instituicao_id'];
         $evento->save();
 
         return $evento;
@@ -38,7 +38,7 @@ class Evento extends Model
             $evento->longitude = $request['localizacao']['longitude'];
             $evento->latitude = $request['localizacao']['latitude'];
         }
-        $evento->fk_insti_id = $request['fk_insti_id'];
+        $evento->instituicao_id = $request['instituicao_id'];
         $evento->save();
 
         return $evento;
@@ -46,6 +46,6 @@ class Evento extends Model
 
     public static function getEventosByInsti($id)
     {
-        return Evento::all()->where('fk_insti_id', '=', $id);
+        return Evento::all()->where('instituicao_id', '=', $id);
     }
 }

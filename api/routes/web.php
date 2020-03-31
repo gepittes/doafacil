@@ -30,7 +30,7 @@ $router->group(['prefix' => $apiPattern], function () use ($router) {
     });
 
     $router->group(['namespace' => 'Ponto'], function () use ($router) {
-        $router->get('/pontoByInst/{id}', 'PontoController@getPontoByInst');
+        $router->get('/ponto/instituicao/{id}', 'PontoController@getPontoByInst');
         $router->get('/ponto', 'PontoController@get');
         $router->post('/ponto', 'PontoController@post');
         $router->patch('/ponto/{id}', 'PontoController@patch');

@@ -34,7 +34,7 @@ export const removerPonto = ({ dispatch, commit }, pontoId) => {
 
 export const getPontoByInst = ({ dispatch, commit }, instituicaoId) => {
   axios
-    .get(`http://localhost/v1/pontoByInst/${instituicaoId}`)
+    .get(`http://localhost/v1/ponto/instituicao/${instituicaoId}`)
     .then((response) => {
       const { data } = response;
       commit(types.GET_PONTO_BY_INSTITUICAO, data.data);

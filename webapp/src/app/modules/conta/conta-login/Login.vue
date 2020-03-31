@@ -1,15 +1,36 @@
 <template>
-  <v-container fluid fill-height class="doafacil-bg-img">
-    <v-layout align-center justify-center>
-      <v-flex xs12 sm8 md4>
-        <v-layout column justify-righer>
+  <v-container
+    fluid
+    fill-height
+    class="doafacil-bg-img"
+  >
+    <v-layout
+      align-center
+      justify-center
+    >
+      <v-flex
+        xs12
+        sm8
+        md4
+      >
+        <v-layout
+          column
+          justify-righer
+        >
           <v-card class="elevation-12">
-            <v-toolbar dark class="gradient-doafacil-bg">
+            <v-toolbar
+              dark
+              class="gradient-doafacil-bg"
+            >
               <MascoteGif :width="50" />
               <v-toolbar-title class="text-uppercase">Login</v-toolbar-title>
             </v-toolbar>
             <v-card-text>
-              <v-form ref="form" v-model="valid" @submit.prevent="submit()">
+              <v-form
+                ref="form"
+                v-model="valid"
+                @submit.prevent="submit()"
+              >
                 <v-text-field
                   v-model="email"
                   :rules="emailRules"
@@ -31,12 +52,16 @@
                 />
 
                 <v-card-actions>
-                  <v-btn to="/cadastrar" color="primary" type="submit"
-                    >Cadastro</v-btn
-                  >
-                  <v-btn :disabled="!valid" color="success" type="submit"
-                    >Login</v-btn
-                  >
+                  <v-btn
+                    to="/cadastrar"
+                    color="primary"
+                    type="submit"
+                  >Cadastro</v-btn>
+                  <v-btn
+                    :disabled="!valid"
+                    color="success"
+                    type="submit"
+                  >Login</v-btn>
                 </v-card-actions>
               </v-form>
             </v-card-text>
@@ -49,11 +74,11 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-// import MascoteGif from '../../components/genericos/MascoteGif.vue'
+import MascoteGif from '@/app/layouts/components/MascoteGif.vue'
 
 export default {
-  // components: { MascoteGif },
-  data() {
+  components: { MascoteGif },
+  data () {
     return {
       window: {
         width: 0,
@@ -72,7 +97,7 @@ export default {
   computed: {
     ...mapState('account', ['status', 'loggingIn'])
   },
-  mounted() {
+  mounted () {
     // reset login status
     this.logout();
   },
@@ -85,7 +110,7 @@ export default {
     }
   },
   methods: {
-    submit() {
+    submit () {
       if (this.$refs.form.validate()) {
         const { email, password } = this;
         if (email && password) {
@@ -93,7 +118,7 @@ export default {
         }
       }
     },
-    clear() {
+    clear () {
       this.$refs.form.reset();
     },
     ...mapActions('account', ['login', 'logout'])

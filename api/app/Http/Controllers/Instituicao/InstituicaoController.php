@@ -46,6 +46,6 @@ class InstituicaoController extends Controller
     {
         $instituicao = new InstituicaoServices();
 
-        return response()->json($instituicao->obter($id, 'fk_usuario_id'));
+        return response()->json($instituicao->obter($id, 'usuario_id'));
     }
 }

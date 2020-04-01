@@ -12,6 +12,8 @@ class PontoDeDoacao extends Model
         'hora_open',
         'hora_close',
         'instituicao_id',
+        'longitude',
+        'latitude',
         'image'
     ];
 
@@ -19,7 +21,6 @@ class PontoDeDoacao extends Model
 
     public static function getPontoByInst($id)
     {
-        return PontoDeDoacao::where('instituicao_id','=',$id)->get();
+        return PontoDeDoacao::where('instituicao_id', '=', $id)->get();
     }
-
 }

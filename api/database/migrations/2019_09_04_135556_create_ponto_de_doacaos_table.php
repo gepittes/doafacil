@@ -19,6 +19,8 @@ class CreatePontoDeDoacaosTable extends Migration
             $table->string('descricao');
             $table->string('hora_open')->nullable();
             $table->string('hora_close')->nullable();
+            $table->string('longitude')->nullable();
+            $table->string('latitude')->nullable();
             $table->unsignedbigInteger('instituicao_id')
                 ->references('id')
                 ->on('app.instituicao')

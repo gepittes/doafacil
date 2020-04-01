@@ -1,8 +1,7 @@
 <?php
 
-use App\Models\Usuario;
+use App\Models\Instituicao;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
 
 class InstituicaoTableSeeder extends Seeder
 {
@@ -13,12 +12,14 @@ class InstituicaoTableSeeder extends Seeder
      */
     public function run()
     {
-        $registros = DB::table('app.instituicao')
-            ->limit(1)
-            ->get();
-        if(count($registros) < 1) {
-            // cria 10 usuários utilizando a factory para o model Usuario
-            factory(App\Models\Instituicao::class, 10)->create();
-        }
+        Instituicao::create([
+            "nome" => "Ajuda os DOGS",
+            "telefone" => "(61)99855-6546",
+            "localidade" => "Brasília",
+            "uf" => "DF",
+            "hora_open" => "08:00",
+            "hora_close" => "18:00",
+            "usuario_id" => 1
+        ]);
     }
 }

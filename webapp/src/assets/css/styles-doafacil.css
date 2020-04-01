@@ -1,38 +1,38 @@
 .gradient-doafacil-bg {
-    background: #00B4DB;
-    background: -webkit-linear-gradient(to left, #0083B0, #00B4DB);
-    background: linear-gradient(to left, #0083B0, #00B4DB);
+  background: #00b4db;
+  background: -webkit-linear-gradient(to left, #0083b0, #00b4db);
+  background: linear-gradient(to left, #0083b0, #00b4db);
 }
 
 .doafacil-bg-img {
-    /* background-image: url("../../assets/home/union-hands.jpg"); */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    transform: scale(1);
-    width: 100% !important;
-    height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: scale(1);
+  width: 100% !important;
+  height: 100%;
+  background-image: url('../img/union-hands.jpg');
 }
 
-.t-doar{
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.9);
+.t-doar {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.9);
 }
-.t-facil{
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.9);
-    color: #00d0f9;
+.t-facil {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.9);
+  color: #00d0f9;
 }
 .t-justify {
-    text-align: justify;
+  text-align: justify;
 }
 
 a {
-    text-decoration: none !important;
+  text-decoration: none !important;
 }
 
 ::-webkit-scrollbar {
-    width: 12px;
-    background: #dad7d7;
+  width: 12px;
+  background: #dad7d7;
 }
 ::-webkit-scrollbar-thumb {
-    background: #00B4DB;
+  background: #00b4db;
 }

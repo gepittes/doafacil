@@ -1,5 +1,8 @@
 <template>
-  <v-img :src="gifMascote" :max-width="width" />
+  <v-img
+    :src="gifMascote"
+    :max-width="width"
+  />
 </template>
 
 <script>
@@ -8,10 +11,10 @@ export default {
   props: {
     width: Number
   },
-  data() {
-    // return {
-    //   gifMascote: require('../../assets/doafacil/gifs/hand-gif.gif'),
-    // }
+  data () {
+    return {
+      gifMascote: require('@/assets/gifs/hand-gif.gif'),
+    }
   }
 };
 </script>

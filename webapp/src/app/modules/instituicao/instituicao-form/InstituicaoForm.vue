@@ -1,22 +1,43 @@
 <template>
-  <v-dialog v-model="dialog" max-width="500px" persistent>
+  <v-dialog
+    v-model="dialog"
+    max-width="500px"
+    persistent
+  >
     <v-card light>
       <v-container grid-list-md>
-        <v-layout xs12 sm6 md6 align-center justify-center>
+        <v-layout
+          xs12
+          sm6
+          md6
+          align-center
+          justify-center
+        >
           <v-card-text>
             <v-list-item>
               <v-list-item-avatar color="grey"></v-list-item-avatar>
               <v-list-item-content>
-                <v-list-item-title v-if="!instituicao.id" class="headline mt-1"
-                  >Cadastrar Instituição
+                <v-list-item-title
+                  v-if="!instituicao.id"
+                  class="headline mt-1"
+                >Cadastrar Instituição
                 </v-list-item-title>
-                <v-list-item-title v-else class="headline ma-1"
-                  >Atualizar Instituição
+                <v-list-item-title
+                  v-else
+                  class="headline ma-1"
+                >Atualizar Instituição
                 </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-form ref="form" lazy-validation @submit.prevent="salvar()">
-              <v-flex left justify-center>
+            <v-form
+              ref="form"
+              lazy-validation
+              @submit.prevent="salvar()"
+            >
+              <v-flex
+                left
+                justify-center
+              >
                 <v-text-field
                   v-if="false"
                   v-model="instituicao.id"
@@ -127,10 +148,13 @@
                   type="cancel"
                   class="ma ma-1"
                   @click="closeDialog"
-                  >Fechar
+                >Fechar
                 </v-btn>
-                <v-btn class="ma ma-1" color="primary" type="submit"
-                  >Salvar
+                <v-btn
+                  class="ma ma-1"
+                  color="primary"
+                  type="submit"
+                >Salvar
                 </v-btn>
               </v-card-actions>
             </v-form>
@@ -148,7 +172,7 @@ import { mask } from 'vue-the-mask';
 export default {
   name: 'FormInstituicao',
   directives: { mask },
-  data() {
+  data () {
     return {
       menuHoraOpen: false,
       menuHoraClose: false,
@@ -167,7 +191,7 @@ export default {
       accountInfo: 'account/accountInfo',
       getInstituicaoEditar: 'instituicao/getInstituicaEditar'
     }),
-    cidade() {
+    cidade () {
       this.estados.forEach((e) => {
         if (e.nome === this.instituicao.uf) {
           this.cidades = e.cidades;
@@ -178,13 +202,13 @@ export default {
   },
 
   watch: {
-    getInstituicaoEditar(value) {
+    getInstituicaoEditar (value) {
       this.carregarEstados();
       this.instituicao = { ...value };
     }
   },
 
-  created() {
+  created () {
     this.carregarEstados();
   },
 
@@ -196,26 +220,26 @@ export default {
       statusDialog: 'instituicao/setDialog'
     }),
 
-    closeDialog() {
+    closeDialog () {
       this.statusDialog(false);
       this.resetValidation();
       this.reset();
       this.insitituicaoEditar({});
     },
 
-    resetValidation() {
+    resetValidation () {
       this.$refs.form.resetValidation();
     },
 
-    reset() {
+    reset () {
       this.instituicao = {};
     },
 
-    salvar() {
+    salvar () {
       this.submitted = true;
 
       if (this.$refs.form.validate()) {
-        this.instituicao.fk_usuario_id = this.accountInfo.user_id;
+        this.instituicao.usuario_id = this.accountInfo.user_id;
 
         // veririfica se o formulario está preenchido  para atualizar se não criando novo
         if (this.instituicao.id) {
@@ -227,7 +251,7 @@ export default {
       }
     },
 
-    async carregarEstados() {
+    async carregarEstados () {
       await axios
         .get(
           'https://gist.githubusercontent.com/letanure/3012978/raw/36fc21d9e2fc45c078e0e0e07cce3c81965db8f9/estados-cidades.json'

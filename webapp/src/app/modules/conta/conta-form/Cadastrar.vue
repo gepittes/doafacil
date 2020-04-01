@@ -1,14 +1,29 @@
 <template>
-  <v-container fluid fill-height class="doafacil-bg-img">
-    <v-layout align-center justify-center>
-      <v-flex xs12 sm8 md4>
-        <v-layout column justify-center>
+  <v-container
+    fluid
+    fill-height
+    class="doafacil-bg-img"
+  >
+    <v-layout
+      align-center
+      justify-center
+    >
+      <v-flex
+        xs12
+        sm8
+        md4
+      >
+        <v-layout
+          column
+          justify-center
+        >
           <v-card class="elevation-12">
-            <v-toolbar dark class="gradient-doafacil-bg">
-              <!-- <MascoteGif :width="50" /> -->
-              <v-toolbar-title class="text-uppercase"
-                >Cadastrar</v-toolbar-title
-              >
+            <v-toolbar
+              dark
+              class="gradient-doafacil-bg"
+            >
+              <MascoteGif :width="50" />
+              <v-toolbar-title class="text-uppercase">Cadastrar</v-toolbar-title>
             </v-toolbar>
             <v-card-text>
               <v-form
@@ -60,15 +75,16 @@
                   {{ errors.first('password') }}
                 </div>
                 <v-card-actions>
-                  <v-btn to="/login" color="green darken-2" class="white--text"
-                    >Login</v-btn
-                  >
+                  <v-btn
+                    to="/login"
+                    color="green darken-2"
+                    class="white--text"
+                  >Login</v-btn>
                   <v-btn
                     :disabled="status.registering"
                     color="primary"
                     type="submit"
-                    >Cadastrar</v-btn
-                  >
+                  >Cadastrar</v-btn>
                   <img v-show="status.registering" />
                 </v-card-actions>
               </v-form>
@@ -82,10 +98,10 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
-// import MascoteGif from '../../components/genericos/MascoteGif.vue'
+import MascoteGif from '@/app/layouts/components/MascoteGif.vue'
 
 export default {
-  data() {
+  data () {
     return {
       user: {
         nome: '',
@@ -104,13 +120,13 @@ export default {
       }
     };
   },
-  // components: { MascoteGif },
+  components: { MascoteGif },
   computed: {
     ...mapState('account', ['status'])
   },
   methods: {
     ...mapActions('account', ['register']),
-    tratarSubmissao() {
+    tratarSubmissao () {
       this.submitted = true;
       if (this.$refs.form.validate()) {
         this.register(this.user);

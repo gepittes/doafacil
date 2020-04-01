@@ -10,8 +10,12 @@
       dismissible
     >
       <slot />
-      <v-btn dark text @click="changeStatus">
-        Close
+      <v-btn
+        dark
+        text
+        @click="changeStatus"
+      >
+        Fechar
       </v-btn>
     </v-snackbar>
   </div>
@@ -31,12 +35,12 @@ export default {
     top: true,
   }),
   methods: {
-    changeStatus() {
+    changeStatus () {
       this.snackbar = false
     },
   },
   watch: {
-    color() {
+    color () {
       this.snackbar = true
     },
   },

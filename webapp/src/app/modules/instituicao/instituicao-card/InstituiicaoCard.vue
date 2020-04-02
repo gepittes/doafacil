@@ -148,10 +148,6 @@ export default {
     };
   },
 
-  created () {
-    console.log(this.$route.path)
-  },
-
   methods: {
     ...mapActions({
       statusDialog: 'instituicao/setDialog',

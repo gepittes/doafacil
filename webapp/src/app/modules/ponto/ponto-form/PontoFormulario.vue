@@ -1,8 +1,20 @@
 <template>
   <v-container pa-0>
-    <v-form ref="form" lazy-validation @submit.prevent="salvar()" pa-0>
-      <v-row justify="center" pa-0>
-        <v-col xl="6" md="6" pa-0>
+    <v-form
+      ref="form"
+      lazy-validation
+      @submit.prevent="salvar()"
+      pa-0
+    >
+      <v-row
+        justify="center"
+        pa-0
+      >
+        <v-col
+          xl="6"
+          md="6"
+          pa-0
+        >
           <v-text-field
             v-model="ponto.nome"
             :rules="[rules.required]"
@@ -14,8 +26,16 @@
             :rules="[rules.required]"
             label="Descrição do ponto"
           />
-          <v-row justify="center" pa-0>
-            <v-col cols="12" xl="6" md="6" pa-0>
+          <v-row
+            justify="center"
+            pa-0
+          >
+            <v-col
+              cols="12"
+              xl="6"
+              md="6"
+              pa-0
+            >
               <v-menu
                 ref="menuHoraOpen"
                 v-model="menuHoraOpen"
@@ -24,7 +44,6 @@
                 :return-value.sync="ponto.hora_open"
                 transition="scale-transition"
                 offset-y
-                full-width
                 max-width="290px"
                 min-width="290px"
               >
@@ -41,14 +60,16 @@
                 <v-time-picker
                   v-if="menuHoraOpen"
                   v-model="ponto.hora_open"
-                  full-width
                   format="24hr"
                   scrollable
                   @click:minute="$refs.menuHoraOpen.save(ponto.hora_open)"
                 />
               </v-menu>
             </v-col>
-            <v-col md="6" xl="6">
+            <v-col
+              md="6"
+              xl="6"
+            >
               <v-menu
                 ref="menuHoraClose"
                 v-model="menuHoraClose"
@@ -57,7 +78,6 @@
                 :return-value.sync="ponto.hora_close"
                 transition="scale-transition"
                 offset-y
-                full-width
                 max-width="290px"
                 min-width="290px"
               >
@@ -74,7 +94,6 @@
                 <v-time-picker
                   v-if="menuHoraClose"
                   v-model="ponto.hora_close"
-                  full-width
                   format="24hr"
                   scrollable
                   @click:minute="$refs.menuHoraClose.save(ponto.hora_close)"
@@ -83,29 +102,42 @@
             </v-col>
           </v-row>
         </v-col>
+        <MapboxFull @localizacao="ponto.localizacao = $event" />
       </v-row>
-      <v-row align="center" justify="end" pa-0>
+
+      <v-row
+        align="center"
+        justify="end"
+        pa-0
+      >
         <v-card-actions>
           <v-btn
             color="secundary"
             type="cancel"
             class="ma ma-1"
             @click="closeDialog()"
-            >Fechar
+          >Fechar
           </v-btn>
-          <v-btn class="ma ma-1" color="primary" type="submit">Salvar </v-btn>
+          <v-btn
+            class="ma ma-1"
+            color="primary"
+            type="submit"
+          >Salvar </v-btn>
         </v-card-actions>
       </v-row>
     </v-form>
   </v-container>
 </template>
+
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import MapboxFull from '@/@core/mapa/Mapa.vue';
 
 export default {
   name: 'PontoFormulario',
   props: ['instiSelected'],
-  data() {
+  components: { MapboxFull },
+  data () {
     return {
       menuHoraOpen: false,
       menuHoraClose: false,
@@ -124,7 +156,7 @@ export default {
   watch: {
     pontoEditar: {
       deep: true,
-      handler(value) {
+      handler (value) {
         if ('error' in value) {
           this.ponto = {}
         } else {
@@ -133,7 +165,7 @@ export default {
       },
     },
   },
-  created() {
+  created () {
     this.loadPonto(this.pontoEditar)
   },
   methods: {
@@ -143,18 +175,18 @@ export default {
       cleanPontoEditar: 'ponto/cleanPontoEditar',
     }),
 
-    closeDialog() {
+    closeDialog () {
       this.resetValidation()
       this.reset()
       this.$emit('closePainel', [])
     },
-    reset() {
+    reset () {
       this.ponto = {}
     },
-    resetValidation() {
+    resetValidation () {
       this.$refs.form.resetValidation()
     },
-    salvar() {
+    salvar () {
       this.submitted = true
       if (this.$refs.form.validate()) {
         const { ponto } = this
@@ -171,7 +203,7 @@ export default {
       }
       this.$emit('closePainel', [])
     },
-    loadPonto(value) {
+    loadPonto (value) {
       if (value) {
         this.ponto = { ...value }
       }

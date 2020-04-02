@@ -24,12 +24,20 @@
     </v-card-text>
 
     <v-card-actions>
-      <v-btn color="deep-purple accent-4" text @click="openMap">
+      <v-btn
+        color="deep-purple accent-4"
+        text
+        @click="openMap"
+      >
         <v-icon>fa fa-map-marker-alt mr-2</v-icon>
         Mapa do local
       </v-btn>
       <v-spacer />
-      <v-btn icon v-if="this.$route.name === `pontos`" @click="update(ponto)">
+      <v-btn
+        icon
+        v-if="this.$route.name === `pontos`"
+        @click="update(ponto)"
+      >
         <v-icon>
           edit
         </v-icon>
@@ -42,7 +50,10 @@
         max-width="290"
       >
         <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on">
+          <v-btn
+            icon
+            v-on="on"
+          >
             <v-icon>
               delete
             </v-icon>
@@ -50,16 +61,14 @@
         </template>
         <v-card>
           <v-card-title class="headline">Excluir o ponto!</v-card-title>
-          <v-card-text
-            >Seu ponto será excluido permanente você deseja realmente
-            continuar?</v-card-text
-          >
+          <v-card-text>Seu ponto será excluido permanente você deseja realmente
+            continuar?</v-card-text>
           <v-card-actions>
             <v-btn
               color="blue-grey"
               class="ma-2 white--text"
               @click="dialog = false"
-              ><i class="fas fa-window-close mr-1" /> Não
+            ><i class="fas fa-window-close mr-1" /> Não
             </v-btn>
             <v-spacer />
             <v-btn
@@ -90,7 +99,7 @@ export default {
     },
     update: { type: Function }
   },
-  data() {
+  data () {
     return {
       dialog: false,
       selection: 1
@@ -102,17 +111,17 @@ export default {
       setImage: 'ponto/setImage'
     }),
 
-    deletePonto() {
+    deletePonto () {
       this.dialog = !this.dialog;
       this.removerPonto(this.ponto.id);
     },
-    setObject(e) {
+    setObject (e) {
       this.setImage(e);
     },
     // update(ponto) {
     //   this.$emit("closePainel", []);
     // },
-    openMap() {
+    openMap () {
       //
     }
   }

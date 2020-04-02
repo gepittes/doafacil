@@ -46,7 +46,7 @@ export const getPontoByInst = ({ dispatch, commit }, instituicaoId) => {
     });
 };
 
-export const cadastraPontoDeDoacao = ({ dispatch, commit }, ponto) =>
+export const cadastraPontoDeDoacao = ({ dispatch, commit }, ponto) => {
   axios
     .post('http://localhost/v1/ponto', ponto)
     .then((response) => {
@@ -61,6 +61,7 @@ export const cadastraPontoDeDoacao = ({ dispatch, commit }, ponto) =>
         root: true
       });
     });
+};
 
 export const atualizarPonto = ({ dispatch, commit }, ponto) =>
   requisicaoAutorizada

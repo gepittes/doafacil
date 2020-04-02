@@ -2,9 +2,7 @@
 
 namespace App\Services\Ponto;
 
-use App\Models\Objeto_Image;
 use App\Models\PontoDeDoacao;
-
 
 class PontoServices
 {
@@ -21,8 +19,8 @@ class PontoServices
     public function criar($dados)
     {
         try {
+            $dados = PontoServices::destructuringLocation(($dados));
             return PontoDeDoacao::create($dados);
-
         } catch (\Exception $exception) {
             throw $exception;
         }
@@ -30,8 +28,9 @@ class PontoServices
 
     public function alterar($id, $dados)
     {
-
         unset($dados['image']);
+
+        $dados = PontoServices::destructuringLocation(($dados));
         $ponto = PontoDeDoacao::where('id', $id)->update($dados);
 
         return $ponto;
@@ -48,8 +47,16 @@ class PontoServices
         $ponto->image =  $image;
         $ponto->update();
 
-       return $ponto;
+        return $ponto;
     }
 
+    public static function destructuringLocation($data)
+    {
+        $localizacao = $data['localizacao'];
+        unset($data['localizacao']);
+        $data['longitude'] = $localizacao['longitude'];
+        $data['latitude'] = $localizacao['latitude'];
 
+        return $data;
+    }
 }

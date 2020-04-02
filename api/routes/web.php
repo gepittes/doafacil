@@ -48,6 +48,15 @@ $router->group(['prefix' => $apiPattern], function () use ($router) {
         $router->post('/image', 'ImageController@post');
     });
 
+    $router->group(['namespace' => 'Item'], function () use ($router) {
+        $router->get('/item/instituicao/{id}', 'ItemController@getItensByInsti');
+        $router->get('/item', 'ItemController@get');
+        $router->get('/item/{id}', 'ItemController@get');
+        $router->post('/item', 'ItemController@post');
+        $router->patch('/item/{id}', 'ItemController@patch');
+        $router->delete('/item/{id}', 'ItemController@delete');
+    });
+
     $router->group(['middleware' => 'jwt.auth'], function () use ($router) {
     });
 });

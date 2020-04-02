@@ -39,7 +39,6 @@
                 v-model="modalData"
                 :return-value.sync="evento.data"
                 persistent
-                full-width
                 width="290px"
               >
                 <template v-slot:activator="{ on }">
@@ -86,7 +85,6 @@
                 v-model="modalHora"
                 :return-value.sync="evento.hora"
                 persistent
-                full-width
                 width="290px"
               >
                 <template v-slot:activator="{ on }">
@@ -102,7 +100,6 @@
                 <v-time-picker
                   v-if="modalHora"
                   v-model="evento.hora"
-                  full-width
                   format="24hr"
                 >
                   <div class="flex-grow-1"></div>

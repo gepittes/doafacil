@@ -2,21 +2,44 @@
   <v-row class="fill-height">
     <v-col>
       <v-sheet height="64">
-        <v-toolbar flat color="white">
-          <v-btn outlined class="mr-4" @click="setToday">
+        <v-toolbar
+          flat
+          color="white"
+        >
+          <v-btn
+            outlined
+            class="mr-4"
+            @click="setToday"
+          >
             Hoje
           </v-btn>
-          <v-btn fab text small @click="prev">
+          <v-btn
+            fab
+            text
+            small
+            @click="prev"
+          >
             <v-icon small>fas fa-arrow-left</v-icon>
           </v-btn>
-          <v-btn fab text small @click="next">
+          <v-btn
+            fab
+            text
+            small
+            @click="next"
+          >
             <v-icon small>fas fa-arrow-right</v-icon>
           </v-btn>
           <v-toolbar-title>{{ title }}</v-toolbar-title>
           <div class="flex-grow-1"></div>
-          <v-menu bottom right>
+          <v-menu
+            bottom
+            right
+          >
             <template v-slot:activator="{ on }">
-              <v-btn outlined v-on="on">
+              <v-btn
+                outlined
+                v-on="on"
+              >
                 <span>{{ typeToLabel[type] }}</span>
                 <v-icon small>fas fa-arrow-down</v-icon>
               </v-btn>
@@ -58,11 +81,17 @@
           v-model="selectedOpen"
           :close-on-content-click="false"
           :activator="selectedElement"
-          full-width
           offset-x
         >
-          <v-card color="grey lighten-4" min-width="350px" flat>
-            <v-toolbar :color="selectedEvent.color" dark>
+          <v-card
+            color="grey lighten-4"
+            min-width="350px"
+            flat
+          >
+            <v-toolbar
+              :color="selectedEvent.color"
+              dark
+            >
               <v-btn icon>
                 <v-icon>fa fa-paper-plane</v-icon>
               </v-btn>
@@ -79,11 +108,18 @@
               <span v-html="selectedEvent.details"></span>
               <v-divider />
               Hora do evento:
-              <span v-html="selectedEvent.hour" class="badge badge-info"></span>
+              <span
+                v-html="selectedEvent.hour"
+                class="badge badge-info"
+              ></span>
               hrs
             </v-card-text>
             <v-card-actions>
-              <v-btn text color="secondary" @click="selectedOpen = false">
+              <v-btn
+                text
+                color="secondary"
+                @click="selectedOpen = false"
+              >
                 Fechar
               </v-btn>
             </v-card-actions>
@@ -121,7 +157,7 @@ export default {
       eventos: 'evento/getEventosInsti',
     }),
 
-    title() {
+    title () {
       const { start, end } = this
       if (!start || !end) {
         return ''
@@ -149,7 +185,7 @@ export default {
       }
       return ''
     },
-    monthFormatter() {
+    monthFormatter () {
       return this.$refs.calendar.getFormatter({
         timeZone: 'UTC',
         month: 'long',
@@ -157,7 +193,7 @@ export default {
     },
   },
 
-  created() {
+  created () {
     this.eventos.forEach(e => {
       let data = {
         name: e.nome,
@@ -172,7 +208,7 @@ export default {
   },
 
   watch: {
-    eventos(e) {
+    eventos (e) {
       this.events = []
 
       if (e.length === 0) {
@@ -193,7 +229,7 @@ export default {
   },
 
   methods: {
-    random_rgba() {
+    random_rgba () {
       let colors = [
         '#03A9F4',
         '#E53935',
@@ -205,23 +241,23 @@ export default {
       return colors[Math.floor(Math.random() * colors.length)]
     },
 
-    viewDay({ date }) {
+    viewDay ({ date }) {
       this.focus = date
       this.type = 'day'
     },
-    getEventColor(event) {
+    getEventColor (event) {
       return event.color
     },
-    setToday() {
+    setToday () {
       this.focus = this.today
     },
-    prev() {
+    prev () {
       this.$refs.calendar.prev()
     },
-    next() {
+    next () {
       this.$refs.calendar.next()
     },
-    showEvent({ nativeEvent, event }) {
+    showEvent ({ nativeEvent, event }) {
       const open = () => {
         this.selectedEvent = event
         this.selectedElement = nativeEvent.target
@@ -237,11 +273,11 @@ export default {
 
       nativeEvent.stopPropagation()
     },
-    updateRange({ start, end }) {
+    updateRange ({ start, end }) {
       this.start = start
       this.end = end
     },
-    nth(d) {
+    nth (d) {
       return d > 3 && d < 21
         ? 'th'
         : ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'][d % 10]

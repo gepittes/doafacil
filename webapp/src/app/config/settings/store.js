@@ -9,6 +9,7 @@ import instituicao from '../../modules/instituicao/store';
 import ponto from '../../modules/ponto/store';
 import evento from '../../modules/evento/store';
 import image from './../../../@core/image/components/Image.vue';
+import item from '../../modules/item/store';
 
 Vue.use(Vuex);
 
@@ -21,7 +22,8 @@ export default new Vuex.Store({
     ponto,
     instituicao,
     evento,
-    image
+    image,
+    item
   },
   strict: true
 });

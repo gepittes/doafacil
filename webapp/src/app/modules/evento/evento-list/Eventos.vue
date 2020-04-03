@@ -2,9 +2,7 @@
   <v-container>
     <v-row justify="center" align="center">
       <v-col xl="3" md="3">
-        <v-subheader class="text-uppercase font-weight-bold"
-          >Instituição Selecionada:</v-subheader
-        >
+        <v-subheader class="text-uppercase font-weight-bold">Instituição Selecionada:</v-subheader>
       </v-col>
       <v-col xl="4" md="4" cols="12">
         <v-select
@@ -28,8 +26,7 @@
           dark
           :disabled="isDisable"
           @click="openPainel"
-          >Adicionar</v-btn
-        >
+        >Adicionar</v-btn>
       </v-col>
     </v-row>
 
@@ -37,9 +34,7 @@
       <v-col xl="12">
         <v-expansion-panels class="mb-3" :disabled="isDisable">
           <v-expansion-panel>
-            <v-expansion-panel-header
-              >Caledário de Eventos</v-expansion-panel-header
-            >
+            <v-expansion-panel-header>Caledário de Eventos</v-expansion-panel-header>
             <v-expansion-panel-content>
               <Calendario />
             </v-expansion-panel-content>
@@ -54,9 +49,7 @@
             :disabled="isDisable"
           >
             <v-expansion-panel>
-              <v-expansion-panel-header expand-icon="fa fa-plus"
-                >Criação de Evento
-              </v-expansion-panel-header>
+              <v-expansion-panel-header expand-icon="fa fa-plus">Criação de Evento</v-expansion-panel-header>
               <v-expansion-panel-content>
                 <EventoFormulario :instituicao-select="ObjInstiSelect" />
               </v-expansion-panel-content>
@@ -64,25 +57,13 @@
           </v-expansion-panels>
         </v-expand-transition>
 
-        <v-expansion-panels
-          class="mb-3"
-          :disabled="isDisable"
-          :value="statusPainelList"
-        >
+        <v-expansion-panels class="mb-3" :disabled="isDisable" :value="statusPainelList">
           <v-expansion-panel>
-            <v-expansion-panel-header
-              >Gerenciar Eventos</v-expansion-panel-header
-            >
+            <v-expansion-panel-header>Gerenciar Eventos</v-expansion-panel-header>
             <v-expansion-panel-content>
               <v-container>
                 <v-row justify="center">
-                  <v-col
-                    v-for="evento in eventos"
-                    :key="evento.id"
-                    xl="3"
-                    md="6"
-                    lg="4"
-                  >
+                  <v-col v-for="evento in eventos" :key="evento.id" xl="3" md="6" lg="4">
                     <EventoCard :evento="evento" />
                   </v-col>
                 </v-row>
@@ -104,7 +85,7 @@ import EventoFormulario from '../evento-form/EventoForm';
 export default {
   name: 'Eventos',
   components: { EventoFormulario, EventoCard, Calendario },
-  data() {
+  data () {
     return {
       isDisable: true,
       instiSelected: {},
@@ -124,7 +105,7 @@ export default {
   },
 
   watch: {
-    instiSelected() {
+    instiSelected () {
       if (this.instiSelected) {
         this.isDisable = false;
       }
@@ -139,7 +120,7 @@ export default {
     }
   },
 
-  created() {
+  created () {
     this.obterInstiUser(this.accountInfo.user_id);
   },
 
@@ -150,7 +131,7 @@ export default {
       obterEventosInstiuicao: 'evento/obterEventosInstiuicao',
       visibleCreatePnlEvento: 'evento/visibleCreatePnlEvento'
     }),
-    openPainel() {
+    openPainel () {
       this.visibleCreatePnlEvento(!this.getVisibleCreateEvento);
       setTimeout(() => {
         this.statusPnlCreate(0);

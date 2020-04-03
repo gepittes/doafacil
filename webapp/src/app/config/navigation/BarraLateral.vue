@@ -1,11 +1,6 @@
 <template>
   <div id="barra-lateral">
-    <v-navigation-drawer
-      v-if="status.loggedIn"
-      v-model="drawer"
-      width="240px"
-      app
-    >
+    <v-navigation-drawer v-if="status.loggedIn" v-model="drawer" width="240px" app>
       <v-list>
         <v-list-item>
           <v-list-item-avatar>
@@ -21,9 +16,11 @@
 
         <v-list-item link>
           <v-list-item-content>
-            <v-list-item-title class="title">{{
+            <v-list-item-title class="title">
+              {{
               accountInfo.name
-            }}</v-list-item-title>
+              }}
+            </v-list-item-title>
             <v-list-item-subtitle>{{ accountInfo.email }}</v-list-item-subtitle>
           </v-list-item-content>
 
@@ -61,7 +58,7 @@ export default {
       default: false
     }
   },
-  data() {
+  data () {
     return {
       clipped: false,
       fixed: false,
@@ -85,7 +82,7 @@ export default {
     };
   },
   watch: {
-    drawer(value) {
+    drawer (value) {
       this.$emit('closeMenu', value);
     },
     $route: function (val) {
@@ -108,7 +105,7 @@ export default {
     })
   },
   methods: {
-    obterMenusLaterais() {
+    obterMenusLaterais () {
       const menusLaterais = [
         { icon: 'home', text: 'Inicio', to: '/' },
         { icon: 'contacts', text: 'Ponto de Doaçao', to: '/doacao' },

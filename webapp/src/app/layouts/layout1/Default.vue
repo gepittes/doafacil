@@ -1,32 +1,13 @@
 <template>
   <v-app>
     <app-bar class="mb-5" />
-    <v-container
-      class="mt-4"
-      grid-list-md
-    >
-      <v-layout
-        row
-        wrap
-      >
+    <v-container class="mt-4" grid-list-md>
+      <v-layout row wrap>
         <v-row justify="center">
-          <v-col
-            cols="3"
-            md="3"
-            lg="2"
-            xl="2"
-            v-if="menu"
-            class="pa-0"
-          >
+          <v-col cols="3" md="3" lg="2" xl="2" v-if="menu" class="pa-0">
             <menu-instituicao :show-avatar="false" />
           </v-col>
-          <v-col
-            :cols="main"
-            md="9"
-            lg="10"
-            xl="8"
-            class="pa-0 mb-2"
-          >
+          <v-col :cols="main" md="9" lg="10" xl="8" class="pa-0 mb-2">
             <router-view />
           </v-col>
         </v-row>
@@ -34,10 +15,8 @@
       <alerta
         v-if="alert.message != null && alert.message_type != null"
         :color="alert.message_type"
-      >{{ alert.message }}
-      </alerta>
+      >{{ alert.message }}</alerta>
     </v-container>
-
   </v-app>
 </template>
 <script>

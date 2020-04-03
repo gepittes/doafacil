@@ -1,0 +1,4 @@
+export const GET_ITENS_INSTITUICAO = 'GET_ITENS_INSTITUICAO';
+export const STORE_ITEM = 'STORE_ITEM';
+export const UPDATE_ITEM = 'UPDATE_ITEM';
+export const DELETE_ITEM = 'DELETE_ITEM';

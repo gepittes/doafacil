@@ -9,6 +9,7 @@ import PontoPerfil from '../../modules/ponto/ponto-perfil/Perfil.vue';
 import Home from './../../../app/modules/home/Home.vue';
 import Conta from '../../modules/conta/conta-list/Conta.vue';
 import Configuracao from '@/app/modules/instituicao/Configuracao.vue';
+import Itens from '@/app/modules/item/item-list/Itens.vue';
 import store from './../settings/store';
 import Main from './../../../app/modules/home/Main.vue';
 import { obterInformacoesJWT } from '../../modules/account/_helpers/jwt';
@@ -52,6 +53,14 @@ const routesObject = [
     name: 'eventos',
     meta: {
       title: 'Eventos'
+    }
+  },
+  {
+    path: '/itens',
+    component: Itens,
+    name: 'itens',
+    meta: {
+      title: 'Itens da Instituição'
     }
   },
   {

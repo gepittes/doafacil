@@ -16,6 +16,7 @@
   </v-flex>
 </template>
 
+
 <script>
 import { mapGetters } from 'vuex'
 
@@ -35,7 +36,7 @@ export default {
     //     default: true,
     // },
   },
-  data() {
+  data () {
     return {
       clipped: false,
       drawer: false,
@@ -45,34 +46,14 @@ export default {
       rightDrawer: false,
       item: 0,
       items: [
-        {
-          icon: 'fa fa-home',
-          text: 'Inicio',
-          to: '/main',
-        },
-        {
-          icon: 'fa fa-map',
-          text: 'Ponto de Doaçao',
-          to: '/pontos',
-        },
-        {
-          icon: 'fa fa-calendar-alt',
-          text: 'Eventos',
-          to: '/eventos',
-        },
-        {
-          text: 'Instituições',
-          to: '/instituicoes',
-          icon: 'fa fa-stream',
-        },
-        {
-          icon: 'fa fa-comment-alt',
-          text: 'Enviar feedback',
-        },
-        {
-          icon: 'fa fa-question-circle',
-          text: 'Ajuda',
-        },
+        { icon: 'fa fa-home', text: 'Inicio', to: '/main' },
+        { icon: 'fa fa-stream', text: 'Minhas Instituições', to: '/instituicoes' },
+        { icon: 'fa fa-map', text: 'Ponto de Doação', to: '/pontos' },
+        { icon: 'fa fa-calendar-alt', text: 'Eventos', to: '/eventos' },
+        { icon: 'fa fa-list-alt', text: 'Itens', to: '/itens' },
+        { icon: 'fa fa-cog', text: 'Configuração', to: '/configuracao' },
+        { icon: 'fa fa-comment-alt', text: 'Enviar feedback' },
+        { icon: 'fa fa-question-circle', text: 'Ajuda' }
       ],
     }
   },
@@ -84,10 +65,10 @@ export default {
     }),
   },
   watch: {
-    value(val) {
+    value (val) {
       this.drawer = val
     },
-    drawer(val) {
+    drawer (val) {
       this.$emit('input', val)
     },
   },

@@ -19,7 +19,19 @@ export const storeItem = ({ commit, dispatch }, item) => {
       dispatch('alert/success', 'Item salvo com sucesso!', { root: true });
     })
     .catch(() => {
-      dispatch('alert/error', 'Falha ao salvar item.', { root: true });
+      dispatch('alert/error', 'Falha ao salvar o item.', { root: true });
+    });
+};
+
+export const updateItem = ({ commit, dispatch }, item) => {
+  requisicaoAutorizada
+    .patch(`${URL}/item/${item.id}`, item)
+    .then(() => {
+      commit(types.UPDATE_ITEM, item);
+      dispatch('alert/success', 'Item atualizado com sucesso!', { root: true });
+    })
+    .catch(() => {
+      dispatch('alert/error', 'Falha ao atualizar o item.', { root: true });
     });
 };
 
@@ -31,6 +43,6 @@ export const deleteItem = ({ commit, dispatch }, item) => {
       dispatch('alert/success', 'Item deletado com sucesso!', { root: true });
     })
     .catch(() => {
-      dispatch('alert/error', 'Falha ao deletar item.', { root: true });
+      dispatch('alert/error', 'Falha ao deletar o item.', { root: true });
     });
 };

@@ -10,5 +10,9 @@ export const mutations = {
   [types.DELETE_ITEM](state, item) {
     const index = state.itens.indexOf(item);
     state.itens.splice(index, 1);
+  },
+  [types.UPDATE_ITEM](state, item) {
+    const index = state.itens.findIndex((itens) => itens.id === item.id);
+    Object.assign(state.itens[index], item);
   }
 };

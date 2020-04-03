@@ -1,5 +1,5 @@
 <template>
-  <v-data-table :headers="headers" :items="desserts" sort-by="calories">
+  <v-data-table :headers="headers" :items="desserts" sort-by="quantidade" sort-desc>
     <template v-slot:top>
       <v-toolbar flat color="white">
         <!-- Modal Confirm -->
@@ -72,7 +72,7 @@ export default {
         sortable: false,
         value: 'nome',
       },
-      { text: 'Quantidade', value: 'quantidade' },
+      { text: 'Quantidade', value: 'quantidade', sortable: true },
       { text: 'Ações', value: 'actions', sortable: false },
     ],
     desserts: [],
@@ -105,7 +105,8 @@ export default {
   methods: {
     ...mapActions({
       storeItem: 'item/storeItem',
-      removeItem: 'item/deleteItem'
+      removeItem: 'item/deleteItem',
+      updateItem: 'item/updateItem'
     }),
 
     editItem (item) {
@@ -134,7 +135,7 @@ export default {
 
     save () {
       if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem)
+        this.updateItem(this.editedItem);
       } else {
         let item = {
           nome: String(this.editedItem.nome),

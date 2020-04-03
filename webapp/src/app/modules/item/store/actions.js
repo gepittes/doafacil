@@ -10,3 +10,27 @@ export const getItensInstituicao = ({ commit }, instituicaoID) => {
       commit(types.GET_ITENS_INSTITUICAO, resp.data.data);
     });
 };
+
+export const storeItem = ({ commit, dispatch }, item) => {
+  requisicaoAutorizada
+    .post(`${URL}/item`, item)
+    .then(() => {
+      commit(types.STORE_ITEM, item);
+      dispatch('alert/success', 'Item salvo com sucesso!', { root: true });
+    })
+    .catch(() => {
+      dispatch('alert/error', 'Falha ao salvar item.', { root: true });
+    });
+};
+
+export const deleteItem = ({ commit, dispatch }, item) => {
+  requisicaoAutorizada
+    .delete(`${URL}/item/${item.id}`)
+    .then(() => {
+      commit(types.DELETE_ITEM, item);
+      dispatch('alert/success', 'Item deletado com sucesso!', { root: true });
+    })
+    .catch(() => {
+      dispatch('alert/error', 'Falha ao deletar item.', { root: true });
+    });
+};

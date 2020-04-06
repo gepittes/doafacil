@@ -2,7 +2,7 @@
   <img src="https://i.imgur.com/YCh9nXR.png" width="300">
 </p>
 
-## Como Instalar
+## How to install and use (Como Instalar e usar)
 
 1. Copiar e colar `docker-compose.exemplo` para `docker-compose.yml`
 
@@ -158,7 +158,7 @@ CamelCase with **by**
 
 public function `getEventosByInsti`
 
-## How name structure table FOREIGN KEY
+## How name structure table FOREIGN KEY (Como nomear FK de tabelas)
 
 **FOREIGN KEY**
 

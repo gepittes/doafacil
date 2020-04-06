@@ -2,7 +2,7 @@
   <img src="https://i.imgur.com/YCh9nXR.png" width="300">
 </p>
 
-#### Como Instalar
+## Como Instalar
 
 1. Copiar e colar `docker-compose.exemplo` para `docker-compose.yml`
 
@@ -58,4 +58,66 @@
 15. `docker-compose up`
 
 16. Pronto agora o projeto ja esta configurado e pronto para ser desenvolvido novas funcionalidades
+
+## How to name your file in API (Como nomear arquivos na API)
+
+**Name File Styles**
+
+CamelCase
+
+---
+
+**Models**
+
+❌ Objeto_Image (BAD)<br>
+✅ ObjetoImage (GOOD)
+
+**Services**
+
+❌ Objeto_Image_Services (BAD)<br>
+✅ ObjetoImageServices (GOOD)
+
+**Controllers**
+
+❌ Objeto_Image_Controller (BAD)<br>
+✅ ObjetoImageController (GOOD)
+
+Valid for (Models, Services, Controlllers)
+
+
+## How to name end-point REST
+
+
+**Resource Evento**
+
+✅ **GET** `/evento`<br>
+✅ **POST** `/evento`<br>
+✅ **GET (SHOW)** `/evento/{id}`<br>
+✅ **PATCH** `/evento/{id}`<br>
+✅ **DELETE** `/evento/{id}`<br>
+
+**Resource Evento by ID another Resource**
+
+✅ **GET (SHOW)** `/evento/inistituicao/{id}`
+
+Response: Events that belong to a specific institution
+(Eventos que pertence a uma determinada instituição)
+
+`$FIRST_RESOURCE/$ANOTHER_RESOURCE/{$ID_ANOTHER_RESOURCE}`
+
+---
+**Group Routes [REQUIRED]**
+
+```php
+$router->group(['namespace' => 'Evento'], function () use ($router) {
+        $router->get('/evento', 'EventoController@get');
+        $router->get('/evento/{id}', 'EventoController@show');
+        $router->get('/evento/inistituicao/{id}', 'EventoController@getEventosByInsti');
+        $router->post('/evento', 'EventoController@post');
+        $router->patch('/evento/{id}', 'EventoController@patch');
+        $router->delete('/evento/{id}', 'EventoController@delete');
+    });
+```
+
+
 

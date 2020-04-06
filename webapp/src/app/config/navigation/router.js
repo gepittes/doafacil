@@ -29,6 +29,7 @@ const routesObject = [
   {
     path: '/main',
     component: Main,
+    name: 'main',
     meta: {
       title: 'Principal'
     }

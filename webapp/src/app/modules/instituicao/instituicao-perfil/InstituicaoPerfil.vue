@@ -5,21 +5,25 @@
         <v-row align="center" justify="center">
           <v-col cols="12">
             <div class="cover">
-              <img src="http://via.placeholder.com/1600x400" alt="" />
+              <img src="http://via.placeholder.com/1600x400" alt />
             </div>
           </v-col>
         </v-row>
         <v-row>
           <v-col cols="12">
             <v-chip color="primary" label class="mr-3 mt-2">
-              <h5 class="mt-2">{{ instituicao.nome }}</h5>
+              <h3 class="mt-1">{{ instituicao.nome }}</h3>
             </v-chip>
-            <v-chip color="light-green" label class="mt-2">
-              <v-icon left>fa fa-home</v-icon>
-              <span class="h-75 mt-1"
-                >Localidade: {{ instituicao.localidade }} -
-                {{ instituicao.uf }}</span
-              >
+            <v-chip color="green darken-1" label class="mr-3 mt-2">
+              <v-icon left color="white">fa fa-home</v-icon>
+              <h3 class="mt-1 white--text">
+                Localidade: {{ instituicao.localidade }} -
+                {{ instituicao.uf }}
+              </h3>
+            </v-chip>
+            <v-chip color="purple darken-1" label class="mt-2">
+              <v-icon left color="white">fa fa-phone</v-icon>
+              <h3 class="mt-1 white--text">Telefone: {{ instituicao.telefone }}</h3>
             </v-chip>
           </v-col>
         </v-row>
@@ -27,17 +31,12 @@
         <v-row>
           <v-col cols="12">
             <v-card>
-              <v-tabs
-                v-model="tab"
-                background-color="grey lighten-4"
-                centered
-                icons-and-text
-              >
+              <v-tabs v-model="tab" background-color="grey lighten-4" centered icons-and-text>
                 <v-tabs-slider />
 
                 <v-tab href="#tab-1">
-                  Publicações
-                  <v-icon>edit</v-icon>
+                  Itens para Instituição
+                  <v-icon>fa fa-list</v-icon>
                 </v-tab>
 
                 <v-tab href="#tab-2">
@@ -54,19 +53,25 @@
               <v-tabs-items v-model="tab">
                 <v-tab-item value="tab-1">
                   <v-card flat>
-                    <v-card-text>{{ text }}</v-card-text>
+                    <v-card-text>
+                      <div class="ma-9">
+                        <h1 class="mb-3">Olá! Seja Bem-vindo,</h1>
+                        <p>
+                          Caso tenha o interesse de contribuir com a doação de algum item para esta
+                          instituição, basta pesquisar na tabela a baixo. Nesta tabela representa quais itens a mesma está
+                          necessitando. Após decidir que deseja contrituir basta entrar em contato através de seu telefone
+                          logo a cima.
+                        </p>
+                      </div>
+
+                      <DatatableItens :itens="{itens}" />
+                    </v-card-text>
                   </v-card>
                 </v-tab-item>
+
                 <v-tab-item value="tab-2">
                   <v-row justify="center" align="center">
-                    <v-col
-                      xl="3"
-                      md="5"
-                      lg="4"
-                      cols="12"
-                      v-for="ponto in pontos"
-                      :key="ponto.id"
-                    >
+                    <v-col xl="3" md="5" lg="4" cols="12" v-for="ponto in pontos" :key="ponto.id">
                       <div class="ma-5">
                         <PontoCard :ponto="ponto" />
                       </div>
@@ -98,36 +103,39 @@
     </v-row>
   </v-container>
 </template>
+
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import EventoCard from '../../evento/evento-card/EventoCard';
 import PontoCard from '../../ponto/ponto-card/PontoCard';
+import DatatableItens from '@/app/modules/item/datatable-itens/DatatableItens.vue'
 
 export default {
   name: 'Perfil',
-  components: { EventoCard, PontoCard },
-  data() {
+  components: { EventoCard, PontoCard, DatatableItens },
+
+  data () {
     return {
       menuShow: true,
       tab: null,
-      text:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut ' +
-        'labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris' +
-        ' nisi ut aliquip ex ea commodo consequat.'
     };
   },
+
   computed: {
     ...mapGetters({
       instituicao: 'instituicao/getInstiEncontrada',
       eventos: 'evento/getEventosInsti',
-      pontos: 'ponto/ponto'
+      pontos: 'ponto/ponto',
+      itens: 'item/itensInstituicao'
     })
   },
-  created() {
+
+  created () {
     this.obterInstituicoes();
     this.buscarInstituicoe(this.$route.params.id);
     this.obterEventosInstiuicao(this.$route.params.id);
     this.getPontoByInst(this.$route.params.id);
+    this.getItensInstituicao(this.$route.params.id)
   },
 
   methods: {
@@ -135,7 +143,8 @@ export default {
       obterInstituicoes: 'instituicao/obterInstituicoes',
       buscarInstituicoe: 'instituicao/buscartInstituicao',
       obterEventosInstiuicao: 'evento/obterEventosInstiuicao',
-      getPontoByInst: 'ponto/getPontoByInst'
+      getPontoByInst: 'ponto/getPontoByInst',
+      getItensInstituicao: 'item/getItensInstituicao'
     })
   }
 };

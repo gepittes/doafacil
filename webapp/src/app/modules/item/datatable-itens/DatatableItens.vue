@@ -1,5 +1,11 @@
 <template>
-  <v-data-table :headers="headers" :items="desserts" sort-by="quantidade" sort-desc>
+  <v-data-table
+    :headers="headers"
+    :items="desserts"
+    :search="search"
+    sort-by="quantidade"
+    sort-desc
+  >
     <template v-slot:top>
       <v-toolbar flat color="white">
         <!-- Modal Confirm -->
@@ -14,12 +20,20 @@
           </v-card>
         </v-dialog>
         <!-- Modal Confirm -->
-        <v-spacer></v-spacer>
         <!-- Modal Create and Edit -->
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on }">
-            <v-btn color="primary" dark class="mb-2" v-on="on">Novo Item</v-btn>
+            <v-btn color="primary" dark class="mb-2" v-on="on" v-if="isPageManager">Novo Item</v-btn>
+            <v-spacer></v-spacer>
+            <v-text-field
+              v-model="search"
+              class="mr-5"
+              label="Busque itens por aqui"
+              single-line
+              hide-details
+            ></v-text-field>
           </template>
+
           <v-card>
             <v-card-title>
               <span class="headline">{{formTitle}}</span>
@@ -65,7 +79,9 @@ export default {
     dialog: false,
     modal: false,
     itemModal: '',
-    headers: [
+    search: '',
+    isPageManager: false,
+    heads: [
       {
         text: 'Nome do Item',
         align: 'start',
@@ -73,7 +89,6 @@ export default {
         value: 'nome',
       },
       { text: 'Quantidade', value: 'quantidade', sortable: true },
-      { text: 'Ações', value: 'actions', sortable: false },
     ],
     desserts: [],
     editedIndex: -1,
@@ -91,6 +106,14 @@ export default {
     formTitle () {
       return this.editedIndex === -1 ? 'Novo Item' : 'Editar Item'
     },
+
+    headers () {
+      if (this.isPageManager) {
+        return [...this.heads, { text: 'Ações', value: 'actions', sortable: false }]
+      }
+
+      return this.heads
+    }
   },
 
   watch: {
@@ -100,6 +123,10 @@ export default {
     itens () {
       this.desserts = [...this.itens.itens]
     }
+  },
+
+  created () {
+    if (this.$route.path === '/itens') this.isPageManager = true
   },
 
   methods: {

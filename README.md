@@ -2,6 +2,17 @@
   <img src="https://i.imgur.com/YCh9nXR.png" width="300">
 </p>
 
+## Sumary (Sumário)
+
+* [Como Instalar e usar](#how-to-install-and-use-como-instalar-e-usar)
+* [Como nomear arquivos na API](#how-to-name-your-file-in-api-como-nomear-arquivos-na-api)
+* [Como nomear end-points REST](#how-to-name-end-point-rest-como-nomear-end-points-rest)
+* [Como nomear métodos na API](#how-to-name-methods-in-api)
+* [Como nomear FK em tabelas](#how-name-structure-table-foreign-key-como-nomear-fk-de-tabelas)
+
+<hr>
+
+
 ## How to install and use (Como Instalar e usar)
 
 1. Copiar e colar `docker-compose.exemplo` para `docker-compose.yml`

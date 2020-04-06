@@ -85,7 +85,7 @@ CamelCase
 Valid for (Models, Services, Controlllers)
 
 
-## How to name end-point REST
+## How to name end-point REST (Como nomear end-points REST)
 
 
 **Resource Evento**
@@ -118,6 +118,60 @@ $router->group(['namespace' => 'Evento'], function () use ($router) {
         $router->delete('/evento/{id}', 'EventoController@delete');
     });
 ```
+
+## How to name methods in API
+
+**Controller**
+
+public function `get`<br>
+public function `post`<br>
+public function `show`<br>
+public function `patch`<br>
+public function `delete`<br>
+
+---
+
+**Services**
+
+public static function `get`<br>
+public static function `post`<br>
+public static function `show`<br>
+public static function `patch`<br>
+public static function `delete`<br>
+
+---
+
+**Model**
+
+If necessary create basic methods CRUD
+
+public static function `get`<br>
+public static function `post`<br>
+public static function `show`<br>
+public static function `patch`<br>
+public static function `delete`<br>
+
+---
+
+**With Another Resource**
+CamelCase with **by**
+
+public function `getEventosByInsti`
+
+## How name structure table FOREIGN KEY
+
+**FOREIGN KEY**
+
+**usuario_id**
+
+```php
+$table->unsignedBigInteger('usuario_id');
+            $table->foreign('usuario_id')
+                ->references('usuario_id')->on('app.usuario');
+```
+
+
+
 
 
 

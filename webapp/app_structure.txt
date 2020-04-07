@@ -1,0 +1,42 @@
+● src
++---● app
+|   |--main.js
+|   |--registerServiceWorker.js  
+|   +--● config
+|   |  +--● navigation
+|   |  |  |--menuAdmin.vue
+|   |  |  |--menu.vue
+|   |  |  |--router.js
+|   |  +--● plugins
+|   |  |  |--vuetify.js
+|   |  +--● settings
+|   |  |  |--store.js
+|   +--● layout
+|   |  +--● components
+|   |  +--● layout1
+|   |  +--● layout2
+|   |  |--App.vue
+|   +--● modules
+|   |  +--● conta
+|   |  |  +--● conta-form
+|   |  |  |  |--ContaForm.vue
+|   |  |  +--● conta-list
+|   |  |  |  |--ContaList.vue
+|   |  |  +--● conta-login
+|   |  |  |  |--ContaLogin.vue
+|   |  |  +--● conta-perfil
+|   |  |  |  |--ContaPerfil.vue
+|   |  |  +--● store
+|   |  |  |  |--actions.js
+|   |  |  |  |--getters.js
+|   |  |  |  |--mutations.js
+|   |  |  |  |--state.js
+|   |  |  |  |--types.js
+|   |  |  |-- index.js
++---● assets
++---● @core
+|   |--index.js
+|   +--● utils
+|   |  |--filter.js
+|   |  +--● helpers
+|   |  |--index.js

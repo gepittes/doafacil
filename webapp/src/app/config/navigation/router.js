@@ -114,9 +114,15 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  const publicPages = ['/login', '/cadastrar', '/instituicaes', '/sobre', '/'];
+  const publicRoutesStatic = ['/login', '/cadastrar', '/'];
+  const publicRoutesDynamics = [
+    {
+      route: '/instituicao/:id',
+      regex: /(\/instituicao\/\d+)/g
+    }
+  ];
 
-  const authRequired = !publicPages.includes(to.path);
+  const routePublic = publicRoutesStatic.includes(to.path);
   const loggedIn = localStorage.getItem('token');
 
   if (to.path === '/logout') {
@@ -126,13 +132,16 @@ router.beforeEach((to, from, next) => {
     return next('/login');
   }
 
-  if (authRequired && !loggedIn) {
-    return next('/login');
+  const checkDynamicsRoutes = (routes) =>
+    routes.filter((rt) => to.path.match(rt.regex));
+
+  if (!routePublic && !loggedIn) {
+    const result = checkDynamicsRoutes(publicRoutesDynamics);
+    if (!result.length) return next('/login');
   }
 
   try {
     obterInformacoesJWT();
-
     return next();
   } catch (Exception) {
     localStorage.removeItem('token');

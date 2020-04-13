@@ -4,11 +4,15 @@
 
 ## Sumary (Sumário)
 
+* [Previews's](#)
 * [Como Instalar e usar](#how-to-install-and-use-como-instalar-e-usar)
+* [Fluxo da Aplicação](#)
+* [Estrutura de Diretórios WebApp](#)
 * [Como nomear arquivos na API](#how-to-name-your-file-in-api-como-nomear-arquivos-na-api)
 * [Como nomear end-points REST](#how-to-name-end-point-rest-como-nomear-end-points-rest)
 * [Como nomear métodos na API](#how-to-name-methods-in-api)
 * [Como nomear FK em tabelas](#how-name-structure-table-foreign-key-como-nomear-fk-de-tabelas)
+* [Modelagem do Banco de Dados](#)
 
 <hr>
 
@@ -70,13 +74,13 @@
 
 16. Pronto agora o projeto ja esta configurado e pronto para ser desenvolvido novas funcionalidades
 
+---
+
 ## How to name your file in API (Como nomear arquivos na API)
 
 **Name File Styles**
 
 CamelCase
-
----
 
 **Models**
 
@@ -95,9 +99,9 @@ CamelCase
 
 Valid for (Models, Services, Controlllers)
 
+---
 
 ## How to name end-point REST (Como nomear end-points REST)
-
 
 **Resource Evento**
 
@@ -116,7 +120,7 @@ Response: Events that belong to a specific institution
 
 `$FIRST_RESOURCE/$ANOTHER_RESOURCE/{$ID_ANOTHER_RESOURCE}`
 
----
+
 **Group Routes [REQUIRED]**
 
 ```php

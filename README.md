@@ -106,10 +106,10 @@ Valid for (Models, Services, Controlllers)
 **Resource Evento**
 
 ✅ **GET** `/insituicoes`<br>
-✅ **POST** `/eventos`<br>
-✅ **GET (SHOW)** `/eventos/{id}`<br>
-✅ **PATCH** `/eventos/{id}`<br>
-✅ **DELETE** `/eventos/{id}`<br>
+✅ **POST** `/insituicoes`<br>
+✅ **GET (SHOW)** `/insituicoes/{id}`<br>
+✅ **PATCH** `/insituicoes/{id}`<br>
+✅ **DELETE** `/insituicoes/{id}`<br>
 
 **Resource with Relationships**
 

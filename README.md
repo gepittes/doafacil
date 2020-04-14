@@ -6,8 +6,8 @@
 
 - [Previews's](#)
 - [Como Instalar e usar](#how-to-install-and-use-como-instalar-e-usar)
-- [Fluxo da Aplicação](#fluxo-da-aplicacao)
-- [Estrutura de Diretórios WebApp](#)
+- [Fluxo da Aplicação](#fluxo-da-apliacação)
+- [Estrutura de Diretórios WebApp](#estrutura-de-diretórios-webapp)
 - [Como nomear arquivos na API](#how-to-name-your-file-in-api-como-nomear-arquivos-na-api)
 - [Como nomear end-points REST](#how-to-name-end-point-rest-como-nomear-end-points-rest)
 - [Como nomear métodos na API](#how-to-name-methods-in-api)

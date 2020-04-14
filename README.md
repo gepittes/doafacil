@@ -105,32 +105,26 @@ Valid for (Models, Services, Controlllers)
 
 **Resource Evento**
 
-✅ **GET** `/evento`<br>
-✅ **POST** `/evento`<br>
-✅ **GET (SHOW)** `/evento/{id}`<br>
-✅ **PATCH** `/evento/{id}`<br>
-✅ **DELETE** `/evento/{id}`<br>
+✅ **GET** `/insituicoes`<br>
+✅ **POST** `/eventos`<br>
+✅ **GET (SHOW)** `/eventos/{id}`<br>
+✅ **PATCH** `/eventos/{id}`<br>
+✅ **DELETE** `/eventos/{id}`<br>
 
-**Resource Evento by ID another Resource**
+**Resource with Relationships**
 
-✅ **GET (SHOW)** `/evento/inistituicao/{id}`
-
-Response: Events that belong to a specific institution
-(Eventos que pertence a uma determinada instituição)
-
-`$FIRST_RESOURCE/$ANOTHER_RESOURCE/{$ID_ANOTHER_RESOURCE}`
-
+✅ **GET (SHOW)** `/inistituicao/{id}/evento`
 
 **Group Routes [REQUIRED]**
 
 ```php
-$router->group(['namespace' => 'Evento'], function () use ($router) {
-        $router->get('/evento', 'EventoController@get');
-        $router->get('/evento/{id}', 'EventoController@show');
-        $router->get('/evento/inistituicao/{id}', 'EventoController@getEventosByInsti');
-        $router->post('/evento', 'EventoController@post');
-        $router->patch('/evento/{id}', 'EventoController@patch');
-        $router->delete('/evento/{id}', 'EventoController@delete');
+$router->group(['namespace' => 'Instituicao'], function () use ($router) {
+        $router->get('/instituicoes', 'InstituicaoController@get');
+        $router->get('/instituicoes/{id}', 'InstituicaoController@get');
+        $router->get('/instituicoes/{id}/eventos', 'Evento/EventoController@getEventosByInsti');
+        $router->post('/instituicoes', 'InstituicaoController@post');
+        $router->patch('/instituicoes/{id}', 'InstituicaoController@patch');
+        $router->delete('/instituicoes/{id}', 'InstituicaoController@delete');
     });
 ```
 

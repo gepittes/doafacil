@@ -46,10 +46,9 @@ class PontoController extends Controller
         return response()->json($pontoServices->remover($id));
     }
 
-    public function getPontoByInst($id)
+    public function getPontosByInst($id)
     {
         $pontoServices = new PontoService();
         return response()->json($pontoServices->obter($id, 'instituicao_id'));
     }
-
 }

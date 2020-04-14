@@ -30,7 +30,10 @@ class PontoServices
     {
         unset($dados['image']);
 
-        $dados = PontoServices::destructuringLocation(($dados));
+        if (isset($dados['localizacao'])) {
+            $dados = PontoServices::destructuringLocation(($dados));
+        }
+
         $ponto = PontoDeDoacao::where('id', $id)->update($dados);
 
         return $ponto;

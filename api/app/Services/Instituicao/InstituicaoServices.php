@@ -30,7 +30,6 @@ class InstituicaoServices
         try {
 
             return Instituicao::create($dados);
-
         } catch (\Exception $exception) {
             throw $exception;
         }
@@ -43,7 +42,6 @@ class InstituicaoServices
             $ponto = Instituicao::where('id', $id)->update($dados);
 
             return $ponto;
-
         } catch (\Exception $exception) {
             throw $exception;
         }
@@ -51,7 +49,7 @@ class InstituicaoServices
 
     public function remover($id)
     {
-        return Instituicao::findOrFail($id)->delete();
+        return Instituicao::destroy($id);
     }
 
     public static function setImage($id, $image)
@@ -62,5 +60,4 @@ class InstituicaoServices
 
         return $instituicao;
     }
-
 }

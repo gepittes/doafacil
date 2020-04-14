@@ -113,7 +113,7 @@ Valid for (Models, Services, Controlllers)
 
 **Resource with Relationships**
 
-✅ **GET (SHOW)** `/inistituicao/{id}/evento`
+✅ **GET (SHOW)** `/inistituicao/{id}/eventos`
 
 **Group Routes [REQUIRED]**
 

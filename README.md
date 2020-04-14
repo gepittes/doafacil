@@ -178,9 +178,9 @@ $table->unsignedBigInteger('usuario_id');
             $table->foreign('usuario_id')
                 ->references('usuario_id')->on('app.usuario');
 ```
+---
 
-
-
-
-
+<p align="center">
+  <img src="/webapp/src/assets/logos/logo-gepitees.png" width="200">
+</p>
 

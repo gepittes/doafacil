@@ -6,15 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Instituicao extends Model
 {
+    protected $table = 'app.instituicao';
 
     protected $fillable = [
-        'nome',
-        'telefone',
-        'hora_open',
-        'hora_close',
-        'localidade',
-        'uf',
-        'usuario_id',
+        'nome', 'telefone', 'hora_open', 'hora_close', 'usuario_id', 'endereco_id'
     ];
-    protected $table = 'app.instituicao';
 }

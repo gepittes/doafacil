@@ -2,11 +2,12 @@
 
 namespace App\Services\Instituicao;
 
+use App\Models\Endereco;
 use App\Models\Instituicao;
 
 class InstituicaoServices
 {
-    public function obter($id = null, $nameFk = null)
+    public static function get($id = null, $name_fk = null)
     {
         $data = Instituicao::all();
 
@@ -15,8 +16,8 @@ class InstituicaoServices
                 $data = Instituicao::where('id', '=', $id)->get();
             }
 
-            if (!empty(trim($nameFk))) {
-                $data = Instituicao::where($nameFk, '=', $id)->get();
+            if (!empty(trim($name_fk))) {
+                $data = Instituicao::where($name_fk, '=', $id)->get();
             }
 
             return $data;
@@ -25,31 +26,42 @@ class InstituicaoServices
         }
     }
 
-    public function criar(array $dados = [])
+    public static function store(array $data = [])
     {
         try {
+            $endereco = Endereco::store($data['endereco']);
+            unset($data['endereco']);
+            $data['endereco_id'] = $endereco->id;
 
-            return Instituicao::create($dados);
+            return Instituicao::create($data);
         } catch (\Exception $exception) {
             throw $exception;
         }
     }
 
-    public function alterar($id, array $dados = [])
+    public static function update($id, array $data = [])
     {
         try {
+            $insituicao = Instituicao::findOrFail($id);
+            Endereco::patch($insituicao->endereco_id, $data['endereco']);
+            unset($data['endereco']);
 
-            $ponto = Instituicao::where('id', $id)->update($dados);
+            Instituicao::findOrFail($id)->update($data);
+            $insituicao = Instituicao::find($id);
 
-            return $ponto;
+            return $insituicao;
         } catch (\Exception $exception) {
             throw $exception;
         }
     }
 
-    public function remover($id)
+    public static function delete($id)
     {
-        return Instituicao::destroy($id);
+        try {
+            return Instituicao::findOrFail($id)->delete();
+        } catch (\Exception $exception) {
+            throw $exception;
+        }
     }
 
     public static function setImage($id, $image)

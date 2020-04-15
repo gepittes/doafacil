@@ -2,44 +2,52 @@
 
 namespace App\Services\Ponto;
 
+use App\Models\Endereco;
 use App\Models\PontoDeDoacao;
 
 class PontoServices
 {
-    public function obter($id = null, $nameFk = null)
+    public static function get($id = null, $nameFk = null)
     {
         $data = PontoDeDoacao::all();
 
         if (!empty(trim($nameFk))) {
             $data = PontoDeDoacao::where($nameFk, '=', $id)->get();
         }
+
         return $data;
     }
 
-    public function criar($dados)
+    public static function post($data)
     {
         try {
-            $dados = PontoServices::destructuringLocation(($dados));
-            return PontoDeDoacao::create($dados);
+            $endereco = Endereco::store($data['endereco']);
+            unset($data['endereco']);
+            $data['endereco_id'] = $endereco->id;
+
+            return PontoDeDoacao::create($data);
         } catch (\Exception $exception) {
             throw $exception;
         }
     }
 
-    public function alterar($id, $dados)
+    public static function patch($id, $data)
     {
-        unset($dados['image']);
+        try {
+            $ponto = PontoDeDoacao::findOrFail($id);
+            Endereco::patch($ponto->endereco_id, $data['endereco']);
+            unset($data['endereco']);
 
-        if (isset($dados['localizacao'])) {
-            $dados = PontoServices::destructuringLocation(($dados));
+            PontoDeDoacao::findOrFail($id)->update($data);
+            $ponto = PontoDeDoacao::find($id);
+
+            return $ponto;
+        } catch (\Exception $exception) {
+            throw $exception;
         }
-
-        $ponto = PontoDeDoacao::where('id', $id)->update($dados);
-
-        return $ponto;
     }
 
-    public function remover($id)
+    public static function delete($id)
     {
         return PontoDeDoacao::findOrFail($id)->delete();
     }
@@ -51,15 +59,5 @@ class PontoServices
         $ponto->update();
 
         return $ponto;
-    }
-
-    public static function destructuringLocation($data)
-    {
-        $localizacao = $data['localizacao'];
-        unset($data['localizacao']);
-        $data['longitude'] = $localizacao['longitude'];
-        $data['latitude'] = $localizacao['latitude'];
-
-        return $data;
     }
 }

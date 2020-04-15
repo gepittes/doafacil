@@ -19,12 +19,15 @@ class CreatePontoDeDoacaosTable extends Migration
             $table->string('descricao');
             $table->string('hora_open')->nullable();
             $table->string('hora_close')->nullable();
-            $table->string('longitude')->nullable();
-            $table->string('latitude')->nullable();
-            $table->unsignedbigInteger('instituicao_id')
-                ->references('id')
-                ->on('app.instituicao')
-                ->onDelete('cascade');
+
+            $table->unsignedBigInteger('instituicao_id');
+            $table->foreign('instituicao_id')
+                ->references('id')->on('app.instituicao');
+
+            $table->unsignedBigInteger('endereco_id');
+            $table->foreign('endereco_id')
+                ->references('id')->on('app.enderecos');
+
             $table->string('image')->nullable();
             $table->timestamps();
         });

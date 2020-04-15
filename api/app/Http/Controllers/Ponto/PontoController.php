@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Ponto;
 
 use App\Models\PontoDeDoacao;
-use App\Services\Ponto\PontoServices as PontoService;
+use App\Services\Ponto\PontoServices;
 use Psr\Http\Message\ServerRequestInterface;
 use Laravel\Lumen\Routing\Controller;
 
@@ -11,44 +11,34 @@ class PontoController extends Controller
 {
     public function get()
     {
-        $pontoServices = new PontoService();
-        return response()->json($pontoServices->obter());
+        return response()->json(PontoServices::get());
     }
 
     public function post(ServerRequestInterface $request)
     {
-        $dados = $request->getParsedBody();
-        $pontoServices = new PontoService();
-        try {
-            return response()->json($pontoServices->criar($dados));
-        } catch (\Exception $e) {
-            throw $e;
-        }
+        $data = $request->getParsedBody();
+        return response()->json(PontoServices::post($data));
     }
 
     public function show($id)
     {
-        $intituicao = PontoDeDoacao::find($id);
-
-        return response()->json($intituicao);
+        $ponto = PontoDeDoacao::find($id);
+        return response()->json($ponto);
     }
 
     public function patch(ServerRequestInterface $request, $id = null)
     {
-        $dados = $request->getParsedBody();
-        $pontoServices = new PontoService();
-        return response()->json($pontoServices->alterar($id, $dados));
+        $data = $request->getParsedBody();
+        return response()->json(PontoServices::patch($id, $data));
     }
 
     public function delete($id)
     {
-        $pontoServices = new PontoService();
-        return response()->json($pontoServices->remover($id));
+        return response()->json(PontoServices::delete($id));
     }
 
     public function getPontosByInst($id)
     {
-        $pontoServices = new PontoService();
-        return response()->json($pontoServices->obter($id, 'instituicao_id'));
+        return response()->json(PontoServices::get($id, 'instituicao_id'));
     }
 }

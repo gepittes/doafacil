@@ -9,7 +9,7 @@ class Endereco extends Model
   protected $table = 'app.enderecos';
 
   protected $fillable = [
-    'logradouro', 'bairro', 'complemento', 'cep', 'logitude', 'latitude', 'cidade_id'
+    'logradouro', 'bairro', 'complemento', 'cep', 'longitude', 'latitude', 'cidade_id'
   ];
 
   public static function store($data)

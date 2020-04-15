@@ -6,18 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class PontoDeDoacao extends Model
 {
+    protected $table = 'app.ponto_de_doacoes';
+
     protected $fillable = [
         'nome',
         'descricao',
         'hora_open',
         'hora_close',
         'instituicao_id',
-        'longitude',
-        'latitude',
+        'endereco_id',
         'image'
     ];
-
-    protected $table = 'app.ponto_de_doacoes';
 
     public static function getPontoByInst($id)
     {

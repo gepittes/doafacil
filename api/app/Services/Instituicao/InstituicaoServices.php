@@ -26,7 +26,7 @@ class InstituicaoServices
         }
     }
 
-    public static function store(array $data = [])
+    public static function post(array $data = [])
     {
         try {
             $endereco = Endereco::store($data['endereco']);
@@ -39,7 +39,7 @@ class InstituicaoServices
         }
     }
 
-    public static function update($id, array $data = [])
+    public static function patch($id, array $data = [])
     {
         try {
             $insituicao = Instituicao::findOrFail($id);

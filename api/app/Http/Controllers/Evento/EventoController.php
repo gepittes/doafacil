@@ -19,10 +19,10 @@ class EventoController extends Controller
     public function post(ServerRequestInterface $request)
     {
         try {
-            $request = $request->getParsedBody();
-            return response()->json(EventoServices::post($request));
-        } catch (\Exception $e) {
-            return response()->json($e, 204);
+            $data = $request->getParsedBody();
+            return response()->json(EventoServices::post($data));
+        } catch (\Exception $exception) {
+            throw $exception;
         }
     }
 
@@ -32,17 +32,17 @@ class EventoController extends Controller
             $request = $request->getParsedBody();
             $evento = EventoServices::patch($request, $id);
             return response()->json($evento, 200);
-        } catch (\Exception $e) {
-            return response()->json($e, 204);
+        } catch (\Exception $exception) {
+            throw $exception;
         }
     }
 
     public function delete($id)
     {
         try {
-            return response()->json(EventoServices::delete($id) , 200);
-        } catch (\Exception $e) {
-            return response()->json($e, 204);
+            return response()->json(EventoServices::delete($id), 200);
+        } catch (\Exception $exception) {
+            throw $exception;
         }
     }
 

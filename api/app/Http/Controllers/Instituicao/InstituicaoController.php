@@ -21,13 +21,13 @@ class InstituicaoController extends Controller
     public function post(ServerRequestInterface $request)
     {
         $data = $request->getParsedBody();
-        return response()->json(InstituicaoServices::store($data));
+        return response()->json(InstituicaoServices::post($data));
     }
 
     public function patch(ServerRequestInterface $request, $id)
     {
         $data = $request->getParsedBody();
-        return response()->json(InstituicaoServices::update($id, $data));
+        return response()->json(InstituicaoServices::patch($id, $data));
     }
 
     public function delete($id)

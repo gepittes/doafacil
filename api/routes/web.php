@@ -61,6 +61,11 @@ $router->group(['prefix' => $apiPattern], function () use ($router) {
         $router->get('/instituicoes/{id}/itens', 'ItemController@getItensByInsti');
     });
 
+    $router->group(['namespace' => 'Localidades'], function () use ($router) {
+        $router->get('/estados', 'LocalidadesController@getEstados');
+        $router->get('/estados/{id}/cidades', 'LocalidadesController@getCidadesByEstado');
+    });
+
     $router->group(['middleware' => 'jwt.auth'], function () use ($router) {
     });
 });

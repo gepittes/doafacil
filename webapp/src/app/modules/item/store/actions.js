@@ -1,11 +1,11 @@
 import * as types from './types';
 import { requisicaoAutorizada } from '../../account/_helpers/requisicao-autorizada';
 
-const URL = 'http://localhost/v1';
+const BASE_URL = 'http://localhost/v1';
 
 export const getItensInstituicao = ({ commit }, instituicaoID) => {
   requisicaoAutorizada
-    .get(`${URL}/item/instituicao/${instituicaoID}`)
+    .get(`${BASE_URL}/instituicoes/${instituicaoID}/itens`)
     .then((resp) => {
       commit(types.GET_ITENS_INSTITUICAO, resp.data.data);
     });
@@ -13,7 +13,7 @@ export const getItensInstituicao = ({ commit }, instituicaoID) => {
 
 export const storeItem = ({ commit, dispatch }, item) => {
   requisicaoAutorizada
-    .post(`${URL}/item`, item)
+    .post(`${BASE_URL}/itens`, item)
     .then(() => {
       commit(types.STORE_ITEM, item);
       dispatch('alert/success', 'Item salvo com sucesso!', { root: true });
@@ -25,7 +25,7 @@ export const storeItem = ({ commit, dispatch }, item) => {
 
 export const updateItem = ({ commit, dispatch }, item) => {
   requisicaoAutorizada
-    .patch(`${URL}/item/${item.id}`, item)
+    .patch(`${BASE_URL}/itens/${item.id}`, item)
     .then(() => {
       commit(types.UPDATE_ITEM, item);
       dispatch('alert/success', 'Item atualizado com sucesso!', { root: true });
@@ -37,7 +37,7 @@ export const updateItem = ({ commit, dispatch }, item) => {
 
 export const deleteItem = ({ commit, dispatch }, item) => {
   requisicaoAutorizada
-    .delete(`${URL}/item/${item.id}`)
+    .delete(`${BASE_URL}/itens/${item.id}`)
     .then(() => {
       commit(types.DELETE_ITEM, item);
       dispatch('alert/success', 'Item deletado com sucesso!', { root: true });

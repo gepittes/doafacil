@@ -17,14 +17,18 @@ class CreateInstituicaoTable extends Migration
             $table->increments('id');
             $table->string('nome');
             $table->string('telefone');
-            $table->string('localidade');
-            $table->string('uf');
             $table->string('hora_open', null);
             $table->string('hora_close', null);
             $table->string('image')->nullable();
+
             $table->unsignedBigInteger('usuario_id');
             $table->foreign('usuario_id')
                 ->references('usuario_id')->on('app.usuario');
+
+            $table->unsignedBigInteger('endereco_id');
+            $table->foreign('endereco_id')
+                ->references('id')->on('app.enderecos');
+
             $table->timestamps();
         });
     }

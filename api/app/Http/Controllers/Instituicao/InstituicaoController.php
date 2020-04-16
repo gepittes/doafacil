@@ -11,41 +11,32 @@ class InstituicaoController extends Controller
 {
     public function get($id = null)
     {
-        $instituicao = new InstituicaoServices();
-
         if (!empty(trim($id))) {
-            return response()->json($instituicao->obter($id));
+            return response()->json(InstituicaoServices::get($id));
         }
-        return response()->json($instituicao->obter());
+
+        return response()->json(InstituicaoServices::get());
     }
 
     public function post(ServerRequestInterface $request)
     {
-        $dados = $request->getParsedBody();
-        $instituicao = new InstituicaoServices();
-
-        return response()->json($instituicao->criar($dados));
+        $data = $request->getParsedBody();
+        return response()->json(InstituicaoServices::post($data));
     }
 
     public function patch(ServerRequestInterface $request, $id)
     {
-        $dados = $request->getParsedBody();
-        $intituicao = new InstituicaoServices();
-
-        return response()->json($intituicao->alterar($id, $dados));
+        $data = $request->getParsedBody();
+        return response()->json(InstituicaoServices::patch($id, $data));
     }
 
     public function delete($id)
     {
-        $intituicao = new InstituicaoServices();
-
-        return response()->json($intituicao->remover($id));
+        return response()->json(InstituicaoServices::delete($id));
     }
 
     public function getInstisUser($id)
     {
-        $instituicao = new InstituicaoServices();
-
-        return response()->json($instituicao->obter($id, 'usuario_id'));
+        return response()->json(InstituicaoServices::get(null, $id));
     }
 }

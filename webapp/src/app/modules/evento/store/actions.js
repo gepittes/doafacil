@@ -1,7 +1,7 @@
 import * as types from './types';
 import { requisicaoAutorizada } from '../../account/_helpers/requisicao-autorizada';
 
-const URL = 'http://localhost/v1';
+const BASE_URL = 'http://localhost/v1';
 
 export const statusPnlCreate = ({ commit }, payload) => {
   commit(types.ESTADO_PNL_CREATE, payload);
@@ -21,7 +21,7 @@ export const visibleCreatePnlEvento = ({ commit }, payload) => {
 
 export const criarEvento = ({ commit, dispatch }, payload) => {
   requisicaoAutorizada
-    .post(`${URL}/evento`, payload)
+    .post(`${BASE_URL}/eventos`, payload)
     .then((resp) => {
       commit(types.CRIAR_EVENTO, resp.data.data);
       dispatch('alert/success', 'Evento cadastrado com sucesso.', {
@@ -35,7 +35,7 @@ export const criarEvento = ({ commit, dispatch }, payload) => {
 
 export const deletarEvento = ({ commit, dispatch }, eventoID) => {
   requisicaoAutorizada
-    .delete(`${URL}/evento/${eventoID}`)
+    .delete(`${BASE_URL}/eventos/${eventoID}`)
     .then(() => {
       commit(types.DELETAR_EVENTO, eventoID);
       dispatch('alert/success', 'Evento excluido com sucesso!', { root: true });
@@ -50,7 +50,7 @@ export const setImage = ({ commit }, evento) => {
 
 export const atualizarEvento = ({ commit, dispatch }, evento) => {
   requisicaoAutorizada
-    .patch(`${URL}/evento/${evento.id}`, evento)
+    .patch(`${BASE_URL}/eventos/${evento.id}`, evento)
     .then(() => {
       commit(types.ATUALIZAR_EVENTO, evento);
       dispatch('alert/success', 'Evento atualizado com sucesso!', {
@@ -64,7 +64,7 @@ export const atualizarEvento = ({ commit, dispatch }, evento) => {
 
 export const obterEventosInstiuicao = ({ commit, dispatch }, id) => {
   requisicaoAutorizada
-    .get(`${URL}/evento/inistituicao/${id}`)
+    .get(`${BASE_URL}/instituicoes/${id}/eventos`)
     .then((resp) => {
       commit(types.EVENTOS_INSTITUICAO, resp.data.data);
     })

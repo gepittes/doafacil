@@ -2,33 +2,54 @@
 
 namespace App\Services\Evento;
 
+use App\Models\Endereco;
 use App\Models\Evento;
 
 class EventoServices
 {
-
-    public static function get($id)
+    public static function get($id = null, $instituicao_id = null)
     {
+        $data = Evento::get();
+
         try {
-            return Evento::findOrFail($id);
+            if (!empty(trim($id))) {
+                $data = Evento::get($id);
+            }
+
+            if (!empty(trim($instituicao_id))) {
+                $data = Evento::get(null, $instituicao_id);
+            }
+
+            return $data;
         } catch (\Exception $exception) {
             throw $exception;
         }
     }
 
-    public static function post($request)
+    public static function post($data)
     {
         try {
-            return Evento::storeEvento(($request));
+            $endereco = Endereco::store($data['endereco']);
+            unset($data['endereco']);
+            $data['endereco_id'] = $endereco->id;
+
+            return Evento::create($data);
         } catch (\Exception $exception) {
             throw $exception;
         }
     }
 
-    public static function patch($request, $id)
+    public static function patch($data, $id)
     {
         try {
-            return Evento::updateEvento($request, $id);
+            $evento = Evento::findOrFail($id);
+            Endereco::patch($evento->endereco_id, $data['endereco']);
+            unset($data['endereco']);
+
+            Evento::findOrFail($id)->update($data);
+            $evento = Evento::find($id);
+
+            return $evento;
         } catch (\Exception $exception) {
             throw $exception;
         }

@@ -3,53 +3,40 @@
 namespace App\Http\Controllers\Ponto;
 
 use App\Models\PontoDeDoacao;
-use App\Services\Ponto\PontoServices as PontoService;
+use App\Services\Ponto\PontoServices;
 use Psr\Http\Message\ServerRequestInterface;
 use Laravel\Lumen\Routing\Controller;
 
 class PontoController extends Controller
 {
-    public function get()
+    public function get($id = null)
     {
-        $pontoServices = new PontoService();
-        return response()->json($pontoServices->obter());
+        if (!empty(trim($id))) {
+            return response()->json(PontoServices::get($id));
+        }
+
+        return response()->json(PontoServices::get());
     }
 
     public function post(ServerRequestInterface $request)
     {
-        $dados = $request->getParsedBody();
-        $pontoServices = new PontoService();
-        try {
-            return response()->json($pontoServices->criar($dados));
-        } catch (\Exception $e) {
-            throw $e;
-        }
-    }
-
-    public function show($id)
-    {
-        $intituicao = PontoDeDoacao::find($id);
-
-        return response()->json($intituicao);
+        $data = $request->getParsedBody();
+        return response()->json(PontoServices::post($data));
     }
 
     public function patch(ServerRequestInterface $request, $id = null)
     {
-        $dados = $request->getParsedBody();
-        $pontoServices = new PontoService();
-        return response()->json($pontoServices->alterar($id, $dados));
+        $data = $request->getParsedBody();
+        return response()->json(PontoServices::patch($id, $data));
     }
 
     public function delete($id)
     {
-        $pontoServices = new PontoService();
-        return response()->json($pontoServices->remover($id));
+        return response()->json(PontoServices::delete($id));
     }
 
-    public function getPontoByInst($id)
+    public function getPontosByInst($id)
     {
-        $pontoServices = new PontoService();
-        return response()->json($pontoServices->obter($id, 'instituicao_id'));
+        return response()->json(PontoServices::get(null, $id));
     }
-
 }

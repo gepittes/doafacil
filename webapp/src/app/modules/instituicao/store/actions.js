@@ -2,9 +2,11 @@ import axios from 'axios';
 import * as types from './types';
 import { requisicaoAutorizada } from '../../account/_helpers/requisicao-autorizada';
 
+const BASE_URL = 'http://localhost/v1';
+
 export const obterInstituicoes = ({ dispatch, commit }) => {
   requisicaoAutorizada
-    .get('http://localhost/v1/instituicao')
+    .get(`${BASE_URL}/instituicoes`)
     .then((response) => {
       const { data } = response;
       commit(types.OBTER_INSTITUICOES, data.data);
@@ -17,11 +19,12 @@ export const obterInstituicoes = ({ dispatch, commit }) => {
 };
 
 export const removerInstituicao = ({ dispatch, commit }, instituicaoId) => {
+  console.log(instituicaoId);
   requisicaoAutorizada
-    .delete(`http://localhost/v1/instituicao/${instituicaoId}`)
+    .delete(`${BASE_URL}/instituicoes/${instituicaoId}`)
     .then(() => {
       commit(types.DELETE_INSTITUICAO, instituicaoId);
-      dispatch('alert/success', 'Instituicao excluido com sucesso!', {
+      dispatch('alert/success', 'Instituição excluido com sucesso!', {
         root: true
       });
     })
@@ -34,7 +37,7 @@ export const removerInstituicao = ({ dispatch, commit }, instituicaoId) => {
 
 export const cadastrarInstituicao = ({ dispatch, commit }, instituicao) =>
   axios
-    .post('http://localhost/v1/instituicao', instituicao)
+    .post(`${BASE_URL}/instituicoes`, instituicao)
     .then((response) => {
       const { data } = response;
       commit(types.ACRESCENTAR_INSTITUICAO, data.data);
@@ -53,7 +56,7 @@ export const setImage = ({ commit }, instituicao) => {
 
 export const atualizarInstituicao = ({ dispatch, commit }, instituicao) =>
   requisicaoAutorizada
-    .patch(`http://localhost/v1/instituicao/${instituicao.id}`, instituicao)
+    .patch(`${BASE_URL}/instituicoes/${instituicao.id}`, instituicao)
     .then(() => {
       commit(types.ATUALIZAR_INSTITUICAO, instituicao);
       dispatch('alert/success', 'Instituicao atualizado com sucesso!', {
@@ -70,7 +73,7 @@ export const setDialog = ({ commit }, payload) => {
 
 export const obterInstiUser = ({ commit, dispatch }, userId) => {
   requisicaoAutorizada
-    .get(`http://localhost/v1/instituicao/user/buscar/${userId}`)
+    .get(`${BASE_URL}/user/${userId}/instituicoes/`)
     .then((response) => {
       const { data } = response;
       commit(types.OBTER_INSTITUICOES, data.data);
@@ -86,7 +89,7 @@ export const insitituicaoEditar = ({ commit }, payload) => {
 
 export const buscartInstituicao = ({ commit, dispatch }, instituicaoId) => {
   axios
-    .get(`http://localhost/v1/instituicao/${instituicaoId}`)
+    .get(`${BASE_URL}/instituicoes/${instituicaoId}`)
     .then((resp) => {
       commit(types.INSTITUICAO_ENCONTRADA, resp.data.data[0]);
     })

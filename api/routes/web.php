@@ -12,29 +12,33 @@ $router->group(['prefix' => $apiPattern], function () use ($router) {
     $router->post('/autenticacao/login', 'AutenticacaoController@post');
 
     $router->group(['namespace' => 'Instituicao'], function () use ($router) {
-        $router->get('/instituicao', 'InstituicaoController@get');
-        $router->get('/instituicao/{id}', 'InstituicaoController@get');
-        $router->get('/instituicao/user/buscar/{id}', 'InstituicaoController@getInstisUser');
-        $router->post('/instituicao', 'InstituicaoController@post');
-        $router->patch('/instituicao/{id}', 'InstituicaoController@patch');
-        $router->delete('/instituicao/{id}', 'InstituicaoController@delete');
+        $router->get('/instituicoes', 'InstituicaoController@get');
+        $router->get('/instituicoes/{id}', 'InstituicaoController@get');
+        $router->post('/instituicoes', 'InstituicaoController@post');
+        $router->patch('/instituicoes/{id}', 'InstituicaoController@patch');
+        $router->delete('/instituicoes/{id}', 'InstituicaoController@delete');
+
+        $router->get('/user/{id}/instituicoes', 'InstituicaoController@getInstisUser');
     });
 
     $router->group(['namespace' => 'Evento'], function () use ($router) {
-        $router->get('/evento', 'EventoController@get');
-        $router->get('/evento/{id}', 'EventoController@get');
-        $router->get('/evento/inistituicao/{id}', 'EventoController@getEventosByInsti');
-        $router->post('/evento', 'EventoController@post');
-        $router->patch('/evento/{id}', 'EventoController@patch');
-        $router->delete('/evento/{id}', 'EventoController@delete');
+        $router->get('/eventos', 'EventoController@get');
+        $router->get('/eventos/{id}', 'EventoController@get');
+        $router->post('/eventos', 'EventoController@post');
+        $router->patch('/eventos/{id}', 'EventoController@patch');
+        $router->delete('/eventos/{id}', 'EventoController@delete');
+
+        $router->get('/instituicoes/{id}/eventos', 'EventoController@getEventosByInsti');
     });
 
     $router->group(['namespace' => 'Ponto'], function () use ($router) {
-        $router->get('/ponto/instituicao/{id}', 'PontoController@getPontoByInst');
-        $router->get('/ponto', 'PontoController@get');
-        $router->post('/ponto', 'PontoController@post');
-        $router->patch('/ponto/{id}', 'PontoController@patch');
-        $router->delete('/ponto/{id}', 'PontoController@delete');
+        $router->get('/pontos', 'PontoController@get');
+        $router->get('/pontos/{id}', 'PontoController@get');
+        $router->post('/pontos', 'PontoController@post');
+        $router->patch('/pontos/{id}', 'PontoController@patch');
+        $router->delete('/pontos/{id}', 'PontoController@delete');
+
+        $router->get('/instituicoes/{id}/pontos', 'PontoController@getPontosByInst');
     });
 
     $router->group(['namespace' => 'Conta'], function () use ($router) {
@@ -49,12 +53,18 @@ $router->group(['prefix' => $apiPattern], function () use ($router) {
     });
 
     $router->group(['namespace' => 'Item'], function () use ($router) {
-        $router->get('/item/instituicao/{id}', 'ItemController@getItensByInsti');
-        $router->get('/item', 'ItemController@get');
-        $router->get('/item/{id}', 'ItemController@get');
-        $router->post('/item', 'ItemController@post');
-        $router->patch('/item/{id}', 'ItemController@patch');
-        $router->delete('/item/{id}', 'ItemController@delete');
+        $router->get('/itens', 'ItemController@get');
+        $router->get('/itens/{id}', 'ItemController@get');
+        $router->post('/itens', 'ItemController@post');
+        $router->patch('/itens/{id}', 'ItemController@patch');
+        $router->delete('/itens/{id}', 'ItemController@delete');
+
+        $router->get('/instituicoes/{id}/itens', 'ItemController@getItensByInsti');
+    });
+
+    $router->group(['namespace' => 'Localidades'], function () use ($router) {
+        $router->get('/estados', 'LocalidadesController@getEstados');
+        $router->get('/estados/{id}/cidades', 'LocalidadesController@getCidadesByEstado');
     });
 
     $router->group(['middleware' => 'jwt.auth'], function () use ($router) {

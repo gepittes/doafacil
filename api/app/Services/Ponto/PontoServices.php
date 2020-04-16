@@ -2,41 +2,60 @@
 
 namespace App\Services\Ponto;
 
+use App\Models\Endereco;
 use App\Models\PontoDeDoacao;
 
 class PontoServices
 {
-    public function obter($id = null, $nameFk = null)
+    public static function get($id = null, $instituicao_id = null)
     {
-        $data = PontoDeDoacao::all();
+        $data = PontoDeDoacao::get();
 
-        if (!empty(trim($nameFk))) {
-            $data = PontoDeDoacao::where($nameFk, '=', $id)->get();
-        }
-        return $data;
-    }
-
-    public function criar($dados)
-    {
         try {
-            $dados = PontoServices::destructuringLocation(($dados));
-            return PontoDeDoacao::create($dados);
+            if (!empty(trim($id))) {
+                $data = PontoDeDoacao::get($id);
+            }
+
+            if (!empty(trim($instituicao_id))) {
+                $data = PontoDeDoacao::get(null, $instituicao_id);
+            }
+
+            return $data;
         } catch (\Exception $exception) {
             throw $exception;
         }
     }
 
-    public function alterar($id, $dados)
+    public static function post($data)
     {
-        unset($dados['image']);
+        try {
+            $endereco = Endereco::store($data['endereco']);
+            unset($data['endereco']);
+            $data['endereco_id'] = $endereco->id;
 
-        $dados = PontoServices::destructuringLocation(($dados));
-        $ponto = PontoDeDoacao::where('id', $id)->update($dados);
-
-        return $ponto;
+            return PontoDeDoacao::create($data);
+        } catch (\Exception $exception) {
+            throw $exception;
+        }
     }
 
-    public function remover($id)
+    public static function patch($id, $data)
+    {
+        try {
+            $ponto = PontoDeDoacao::findOrFail($id);
+            Endereco::patch($ponto->endereco_id, $data['endereco']);
+            unset($data['endereco']);
+
+            PontoDeDoacao::findOrFail($id)->update($data);
+            $ponto = PontoDeDoacao::find($id);
+
+            return $ponto;
+        } catch (\Exception $exception) {
+            throw $exception;
+        }
+    }
+
+    public static function delete($id)
     {
         return PontoDeDoacao::findOrFail($id)->delete();
     }
@@ -48,15 +67,5 @@ class PontoServices
         $ponto->update();
 
         return $ponto;
-    }
-
-    public static function destructuringLocation($data)
-    {
-        $localizacao = $data['localizacao'];
-        unset($data['localizacao']);
-        $data['longitude'] = $localizacao['longitude'];
-        $data['latitude'] = $localizacao['latitude'];
-
-        return $data;
     }
 }

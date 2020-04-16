@@ -7,17 +7,17 @@ use App\Models\Instituicao;
 
 class InstituicaoServices
 {
-    public static function get($id = null, $name_fk = null)
+    public static function get($id = null, $user_id = null)
     {
-        $data = Instituicao::all();
+        $data = Instituicao::get();
 
         try {
             if (!empty(trim($id))) {
-                $data = Instituicao::where('id', '=', $id)->get();
+                $data = Instituicao::get($id);
             }
 
-            if (!empty(trim($name_fk))) {
-                $data = Instituicao::where($name_fk, '=', $id)->get();
+            if (!empty(trim($user_id))) {
+                $data = Instituicao::get(null, $user_id);
             }
 
             return $data;

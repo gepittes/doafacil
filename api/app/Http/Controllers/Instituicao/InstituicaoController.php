@@ -37,6 +37,6 @@ class InstituicaoController extends Controller
 
     public function getInstisUser($id)
     {
-        return response()->json(InstituicaoServices::get($id, 'usuario_id'));
+        return response()->json(InstituicaoServices::get(null, $id));
     }
 }

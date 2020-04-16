@@ -33,6 +33,7 @@ $router->group(['prefix' => $apiPattern], function () use ($router) {
 
     $router->group(['namespace' => 'Ponto'], function () use ($router) {
         $router->get('/pontos', 'PontoController@get');
+        $router->get('/pontos/{id}', 'PontoController@get');
         $router->post('/pontos', 'PontoController@post');
         $router->patch('/pontos/{id}', 'PontoController@patch');
         $router->delete('/pontos/{id}', 'PontoController@delete');

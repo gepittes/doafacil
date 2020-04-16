@@ -9,8 +9,12 @@ use Laravel\Lumen\Routing\Controller;
 
 class PontoController extends Controller
 {
-    public function get()
+    public function get($id = null)
     {
+        if (!empty(trim($id))) {
+            return response()->json(PontoServices::get($id));
+        }
+
         return response()->json(PontoServices::get());
     }
 
@@ -18,12 +22,6 @@ class PontoController extends Controller
     {
         $data = $request->getParsedBody();
         return response()->json(PontoServices::post($data));
-    }
-
-    public function show($id)
-    {
-        $ponto = PontoDeDoacao::find($id);
-        return response()->json($ponto);
     }
 
     public function patch(ServerRequestInterface $request, $id = null)
@@ -39,6 +37,6 @@ class PontoController extends Controller
 
     public function getPontosByInst($id)
     {
-        return response()->json(PontoServices::get($id, 'instituicao_id'));
+        return response()->json(PontoServices::get(null, $id));
     }
 }

@@ -7,15 +7,23 @@ use App\Models\PontoDeDoacao;
 
 class PontoServices
 {
-    public static function get($id = null, $nameFk = null)
+    public static function get($id = null, $instituicao_id = null)
     {
-        $data = PontoDeDoacao::all();
+        $data = PontoDeDoacao::get();
 
-        if (!empty(trim($nameFk))) {
-            $data = PontoDeDoacao::where($nameFk, '=', $id)->get();
+        try {
+            if (!empty(trim($id))) {
+                $data = PontoDeDoacao::get($id);
+            }
+
+            if (!empty(trim($instituicao_id))) {
+                $data = PontoDeDoacao::get(null, $instituicao_id);
+            }
+
+            return $data;
+        } catch (\Exception $exception) {
+            throw $exception;
         }
-
-        return $data;
     }
 
     public static function post($data)

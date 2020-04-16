@@ -7,11 +7,20 @@ use App\Models\Evento;
 
 class EventoServices
 {
-
-    public static function get($id)
+    public static function get($id = null, $instituicao_id = null)
     {
+        $data = Evento::get();
+
         try {
-            return Evento::findOrFail($id);
+            if (!empty(trim($id))) {
+                $data = Evento::get($id);
+            }
+
+            if (!empty(trim($instituicao_id))) {
+                $data = Evento::get(null, $instituicao_id);
+            }
+
+            return $data;
         } catch (\Exception $exception) {
             throw $exception;
         }

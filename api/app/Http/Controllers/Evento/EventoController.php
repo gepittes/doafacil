@@ -11,9 +11,11 @@ class EventoController extends Controller
 {
     public function get($id = null)
     {
-        if (!empty(trim($id))) return response()->json(EventoServices::get($id));
+        if (!empty(trim($id))) {
+            return response()->json(EventoServices::get($id));
+        }
 
-        return response()->json(Evento::all(), 200);
+        return response()->json(Evento::get());
     }
 
     public function post(ServerRequestInterface $request)
@@ -48,7 +50,6 @@ class EventoController extends Controller
 
     public function getEventosByInsti($id)
     {
-        $eventos = Evento::getEventosByInsti($id);
-        return response()->json($eventos, 200);
+        return response()->json(Evento::get(null, $id));
     }
 }

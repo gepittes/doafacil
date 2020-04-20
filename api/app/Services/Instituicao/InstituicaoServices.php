@@ -33,7 +33,9 @@ class InstituicaoServices
             unset($data['endereco']);
             $data['endereco_id'] = $endereco->id;
 
-            return Instituicao::create($data);
+            $instituicao = Instituicao::create($data);
+
+            return self::get($instituicao->id);
         } catch (\Exception $exception) {
             throw $exception;
         }

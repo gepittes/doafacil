@@ -79,7 +79,7 @@
             </v-col>
           </v-row>
         </v-col>
-        <MapboxFull @localizacao="ponto.localizacao = $event" />
+        <MapBoxSearch @localizacao="ponto.localizacao = $event" />
       </v-row>
 
       <v-row align="center" justify="end" pa-0>
@@ -95,12 +95,12 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import MapboxFull from '@/@core/mapa/Mapa.vue';
+import MapBoxSearch from '@/@core/mapa/MapBoxSearch'
 
 export default {
   name: 'PontoFormulario',
   props: ['instiSelected'],
-  components: { MapboxFull },
+  components: { MapBoxSearch },
   data () {
     return {
       menuHoraOpen: false,

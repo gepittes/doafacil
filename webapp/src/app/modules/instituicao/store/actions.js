@@ -11,15 +11,12 @@ export const obterInstituicoes = ({ dispatch, commit }) => {
       const { data } = response;
       commit(types.OBTER_INSTITUICOES, data.data);
     })
-    .catch((error) => {
-      dispatch('alert/error', error.response.data.error, {
-        root: true
-      });
+    .catch(() => {
+      dispatch('alert/error', 'Falha ao obter instituições.', { root: true });
     });
 };
 
 export const removerInstituicao = ({ dispatch, commit }, instituicaoId) => {
-  console.log(instituicaoId);
   requisicaoAutorizada
     .delete(`${BASE_URL}/instituicoes/${instituicaoId}`)
     .then(() => {
@@ -41,12 +38,12 @@ export const cadastrarInstituicao = ({ dispatch, commit }, instituicao) =>
     .then((response) => {
       const { data } = response;
       commit(types.ACRESCENTAR_INSTITUICAO, data.data);
-      dispatch('alert/success', 'Instituicao cadastado com sucesso!', {
+      dispatch('alert/success', 'Instituição cadastado com sucesso!', {
         root: true
       });
     })
-    .catch((error) => {
-      dispatch('alert/error', error.response.data.error, {
+    .catch(() => {
+      dispatch('alert/error', 'Falhar ao cadastrar Instituicao', {
         root: true
       });
     });
@@ -63,8 +60,8 @@ export const atualizarInstituicao = ({ dispatch, commit }, instituicao) =>
         root: true
       });
     })
-    .catch((error) => {
-      dispatch('alert/error', error.response.data.error, { root: true });
+    .catch(() => {
+      dispatch('alert/error', 'Falha ao atualizar insituição.', { root: true });
     });
 
 export const setDialog = ({ commit }, payload) => {
@@ -78,8 +75,8 @@ export const obterInstiUser = ({ commit, dispatch }, userId) => {
       const { data } = response;
       commit(types.OBTER_INSTITUICOES, data.data);
     })
-    .catch((error) => {
-      dispatch('alert/error', error.response.data.error, { root: true });
+    .catch(() => {
+      dispatch('alert/error', 'Falha ao obter instituições.', { root: true });
     });
 };
 
@@ -94,8 +91,6 @@ export const buscartInstituicao = ({ commit, dispatch }, instituicaoId) => {
       commit(types.INSTITUICAO_ENCONTRADA, resp.data.data[0]);
     })
     .catch((error) => {
-      dispatch('alert/error', error, {
-        root: true
-      });
+      dispatch('alert/error', error, { root: true });
     });
 };

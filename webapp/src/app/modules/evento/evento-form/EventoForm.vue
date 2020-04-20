@@ -1,19 +1,9 @@
 <template>
   <v-container>
-    <v-form
-      ref="form"
-      @submit.prevent="salvar()"
-    >
-      <v-row
-        justify="center"
-        align="center"
-      >
+    <v-form ref="form" @submit.prevent="salvar()">
+      <v-row justify="center" align="center">
         <v-col>
-          <v-text-field
-            v-if="false"
-            v-model="evento.id"
-            label="id"
-          />
+          <v-text-field v-if="false" v-model="evento.id" label="id" />
           <v-text-field
             required
             v-model="evento.nome"
@@ -26,12 +16,7 @@
             :rules="[rules.required]"
           ></v-textarea>
           <v-row justify="center">
-            <v-col
-              xl="4"
-              md="4"
-              lg="4"
-              cols="12"
-            >
+            <v-col xl="4" md="4" lg="4" cols="12">
               <p>Data do Evento</p>
 
               <v-dialog
@@ -59,26 +44,13 @@
                   locale="Brazil"
                 >
                   <div class="flex-grow-1"></div>
-                  <v-btn
-                    text
-                    color="primary"
-                    @click="modalData = false"
-                  >Cancel</v-btn>
-                  <v-btn
-                    text
-                    color="primary"
-                    @click="$refs.dialog_data.save(evento.data)"
-                  >OK</v-btn>
+                  <v-btn text color="primary" @click="modalData = false">Cancel</v-btn>
+                  <v-btn text color="primary" @click="$refs.dialog_data.save(evento.data)">OK</v-btn>
                 </v-date-picker>
               </v-dialog>
             </v-col>
 
-            <v-col
-              xl="4"
-              md="4"
-              lg="4"
-              cols="12"
-            >
+            <v-col xl="4" md="4" lg="4" cols="12">
               <p>Hora do Evento</p>
               <v-dialog
                 ref="dialog_hora"
@@ -97,51 +69,26 @@
                     v-on="on"
                   ></v-text-field>
                 </template>
-                <v-time-picker
-                  v-if="modalHora"
-                  v-model="evento.hora"
-                  format="24hr"
-                >
+                <v-time-picker v-if="modalHora" v-model="evento.hora" format="24hr">
                   <div class="flex-grow-1"></div>
-                  <v-btn
-                    text
-                    color="primary"
-                    @click="modalHora = false"
-                  >Cancel</v-btn>
-                  <v-btn
-                    text
-                    color="primary"
-                    @click="$refs.dialog_hora.save(evento.hora)"
-                  >OK</v-btn>
+                  <v-btn text color="primary" @click="modalHora = false">Cancel</v-btn>
+                  <v-btn text color="primary" @click="$refs.dialog_hora.save(evento.hora)">OK</v-btn>
                 </v-time-picker>
               </v-dialog>
             </v-col>
           </v-row>
           <v-row class="text-center">
             <v-col>
-              <MapboxFull @localizacao="evento.localizacao = $event" />
+              <MapBoxSearch @localizacao="evento.localizacao = $event" />
             </v-col>
           </v-row>
         </v-col>
       </v-row>
 
-      <v-row
-        align="center"
-        justify="end"
-      >
+      <v-row align="center" justify="end">
         <v-card-actions>
-          <v-btn
-            color="secundary"
-            type="cancel"
-            class="ma ma-1"
-            @click="closeDialog"
-          >Fechar
-          </v-btn>
-          <v-btn
-            class="ma ma-1"
-            color="primary"
-            type="submit"
-          >Salvar </v-btn>
+          <v-btn color="secundary" type="cancel" class="ma ma-1" @click="closeDialog">Fechar</v-btn>
+          <v-btn class="ma ma-1" color="primary" type="submit">Salvar</v-btn>
         </v-card-actions>
       </v-row>
     </v-form>
@@ -150,12 +97,12 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import MapboxFull from '../../../../@core/mapa/Mapa';
+import MapBoxSearch from '@/@core/mapa/MapBoxSearch'
 
 export default {
   name: 'EventoFormulario',
   props: { instituicaoSelect: Object },
-  components: { MapboxFull },
+  components: { MapBoxSearch },
   data () {
     return {
       window: {

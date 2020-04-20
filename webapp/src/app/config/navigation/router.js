@@ -4,16 +4,15 @@ import Login from '../../modules/conta/conta-login/Login.vue';
 import Instituicoes from './../../modules/instituicao/instituicao-list/InstituicaoList.vue';
 import PerfilInstituicao from '../../modules/instituicao/instituicao-perfil/InstituicaoPerfil.vue';
 import Cadastrar from '../../../app/modules/conta/conta-form/Cadastrar.vue';
-import Pontos from './../../modules/ponto/ponto-list/Pontos.vue';
-import PontoPerfil from '../../modules/ponto/ponto-perfil/Perfil.vue';
+import Pontos from './../../modules/ponto/ponto-list/PontosList.vue';
 import Home from './../../../app/modules/home/Home.vue';
 import Conta from '../../modules/conta/conta-list/Conta.vue';
 import Configuracao from '@/app/modules/instituicao/Configuracao.vue';
 import Itens from '@/app/modules/item/item-list/Itens.vue';
 import store from './../settings/store';
 import Main from './../../../app/modules/home/Main.vue';
-import { obterInformacoesJWT } from '../../modules/account/_helpers/jwt';
 import Eventos from '../../modules/evento/evento-list/Eventos.vue';
+import { obterInformacoesJWT } from '../../modules/account/_helpers/jwt';
 
 Vue.use(Router);
 
@@ -33,12 +32,6 @@ const routesObject = [
     meta: {
       title: 'Principal'
     }
-  },
-  {
-    path: '/ponto/:id',
-    component: PontoPerfil,
-    name: 'pontoPerfil',
-    props: true
   },
   {
     path: '/pontos',

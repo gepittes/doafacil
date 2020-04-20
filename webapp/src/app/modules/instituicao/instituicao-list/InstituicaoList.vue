@@ -14,10 +14,11 @@
     <InstituicaoFormulario />
   </v-app>
 </template>
+
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import InstituicaoFormulario from './../instituicao-form/InstituicaoForm';
-import Instituicao from '../instituicao-card/InstituiicaoCard';
+import Instituicao from '../instituicao-card/InstituicaoCard';
 
 export default {
   name: 'InstituicoesList',

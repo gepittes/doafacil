@@ -131,7 +131,6 @@ export default {
   },
 
   created () {
-    // this.obterInstituicoes();
     this.buscarInsituicao(this.$route.params.id);
     this.obterEventosInstiuicao(this.$route.params.id);
     this.getPontoByInst(this.$route.params.id);
@@ -140,7 +139,6 @@ export default {
 
   methods: {
     ...mapActions({
-      // obterInstituicoes: 'instituicao/obterInstituicoes',
       buscarInsituicao: 'instituicao/buscartInstituicao',
       obterEventosInstiuicao: 'evento/obterEventosInstiuicao',
       getPontoByInst: 'ponto/getPontoByInst',

@@ -49,15 +49,21 @@
           <v-card-text>
             <div>
               <b>Abre ás:</b>
-              <v-chip class="ma-1" color="green lighten-1">{{ instituicao.hora_open }} hrs</v-chip>
+              <v-chip class="ma-1" color="green lighten-1" dark>
+                <b>{{ instituicao.hora_open }} hrs</b>
+              </v-chip>
             </div>
             <div>
               <b>Fecha ás:</b>
-              <v-chip class="ma-1" color="red lighten-1">{{ instituicao.hora_close }} hrs</v-chip>
+              <v-chip class="ma-1" color="red lighten-1" dark>
+                <b>{{ instituicao.hora_close }} hrs</b>
+              </v-chip>
             </div>
             <div>
               <b>Localidade:</b>
-              <v-chip class="ma-1">{{ instituicao.nm_cidade }} - {{instituicao.sg_estado}}</v-chip>
+              <v-chip class="ma-1" color="blue" dark>
+                <b>{{ instituicao.nm_cidade }} - {{instituicao.sg_estado}}</b>
+              </v-chip>
             </div>
             <hr class="mt-3 mb-3" />
             <v-row justify="center">

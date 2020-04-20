@@ -88,7 +88,7 @@ export const buscartInstituicao = ({ commit, dispatch }, instituicaoId) => {
   axios
     .get(`${BASE_URL}/instituicoes/${instituicaoId}`)
     .then((resp) => {
-      commit(types.INSTITUICAO_ENCONTRADA, resp.data.data[0]);
+      commit(types.INSTITUICAO_ENCONTRADA, resp.data.data);
     })
     .catch((error) => {
       dispatch('alert/error', error, { root: true });

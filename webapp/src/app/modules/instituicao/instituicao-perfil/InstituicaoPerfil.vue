@@ -17,8 +17,8 @@
             <v-chip color="green darken-1" label class="mr-3 mt-2">
               <v-icon left color="white">fa fa-home</v-icon>
               <h3 class="mt-1 white--text">
-                Localidade: {{ instituicao.localidade }} -
-                {{ instituicao.uf }}
+                Localidade: {{ instituicao.nm_cidade }} -
+                {{ instituicao.sg_estado }}
               </h3>
             </v-chip>
             <v-chip color="purple darken-1" label class="mt-2">
@@ -111,7 +111,7 @@ import PontoCard from '../../ponto/ponto-card/PontoCard';
 import DatatableItens from '@/app/modules/item/datatable-itens/DatatableItens.vue'
 
 export default {
-  name: 'Perfil',
+  name: 'InstituicaoPerfil',
   components: { EventoCard, PontoCard, DatatableItens },
 
   data () {
@@ -131,8 +131,8 @@ export default {
   },
 
   created () {
-    this.obterInstituicoes();
-    this.buscarInstituicoe(this.$route.params.id);
+    // this.obterInstituicoes();
+    this.buscarInsituicao(this.$route.params.id);
     this.obterEventosInstiuicao(this.$route.params.id);
     this.getPontoByInst(this.$route.params.id);
     this.getItensInstituicao(this.$route.params.id)
@@ -140,8 +140,8 @@ export default {
 
   methods: {
     ...mapActions({
-      obterInstituicoes: 'instituicao/obterInstituicoes',
-      buscarInstituicoe: 'instituicao/buscartInstituicao',
+      // obterInstituicoes: 'instituicao/obterInstituicoes',
+      buscarInsituicao: 'instituicao/buscartInstituicao',
       obterEventosInstiuicao: 'evento/obterEventosInstiuicao',
       getPontoByInst: 'ponto/getPontoByInst',
       getItensInstituicao: 'item/getItensInstituicao'

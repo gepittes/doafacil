@@ -71,10 +71,8 @@
 
                 <v-tab-item value="tab-2">
                   <v-row justify="center" align="center" v-if="pontos.length">
-                    <v-col xl="3" md="5" lg="4" cols="12" v-for="ponto in pontos" :key="ponto.id">
-                      <div class="ma-5">
-                        <PontoCard :ponto="ponto" />
-                      </div>
+                    <v-col xl="3" md="4" v-for="ponto in pontos" :key="ponto.id">
+                      <PontoCard :ponto="ponto" />
                     </v-col>
                   </v-row>
                   <v-row justify="center" align="center" style="height: 300px" v-else>
@@ -84,17 +82,8 @@
 
                 <v-tab-item value="tab-3">
                   <v-row justify="center" align="center" v-if="eventos.length">
-                    <v-col
-                      xl="3"
-                      md="5"
-                      lg="4"
-                      cols="12"
-                      v-for="evento in eventos"
-                      :key="evento.id"
-                    >
-                      <div class="ma-5">
-                        <EventoCard :evento="evento" />
-                      </div>
+                    <v-col xl="3" md="4" v-for="evento in eventos" :key="evento.id">
+                      <EventoCard :evento="evento" />
                     </v-col>
                   </v-row>
                   <v-row justify="center" align="center" style="height: 300px" v-else>

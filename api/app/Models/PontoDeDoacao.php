@@ -22,6 +22,8 @@ class PontoDeDoacao extends Model
         'ponto.hora_close',
         'ponto.image',
         'ponto.instituicao_id',
+        'end.cidade_id',
+        'cid.estado_id',
         'end.logradouro',
         'end.bairro',
         'end.complemento',

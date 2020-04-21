@@ -43,10 +43,7 @@
             <v-expansion-panel>
               <v-expansion-panel-header expand-icon="fa fa-plus">Criar um ponto de doação</v-expansion-panel-header>
               <v-expansion-panel-content>
-                <PontoFormulario
-                  :insti-selected="instiSelected"
-                  @closePainel="statusPainel = $event"
-                />
+                <PontoFormulario :insti-selected="instiSelected" />
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-expansion-panels>
@@ -82,7 +79,6 @@ export default {
 
   data () {
     return {
-      statusPainel: [],
       isVisible: false,
       isDisable: true,
       instiSelected: {},
@@ -94,7 +90,8 @@ export default {
     ...mapGetters({
       instituicoes: 'instituicao/instituicao',
       pontos: 'ponto/ponto',
-      accountInfo: 'account/accountInfo'
+      accountInfo: 'account/accountInfo',
+      statusPainel: 'ponto/statusPainel'
     })
   },
 
@@ -115,13 +112,14 @@ export default {
     ...mapActions({
       obterInstiUser: 'instituicao/obterInstiUser',
       getPontoByInst: 'ponto/getPontoByInst',
-      setPontoEditar: 'ponto/setPontoEditar'
+      setPontoEditar: 'ponto/setPontoEditar',
+      setStatusPainel: 'ponto/setStatusPainel'
     }),
 
     openPainel () {
       this.isVisible = !this.isVisible;
       setTimeout(() => {
-        this.statusPainel = 0;
+        this.setStatusPainel(0)
       }, 300);
     },
 

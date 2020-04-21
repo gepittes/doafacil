@@ -11,7 +11,7 @@
       </v-card>
     </v-dialog>
 
-    <v-card width="400">
+    <v-card width="400" outlined>
       <imagem
         imgWidth="300"
         imgHeight="100"
@@ -75,7 +75,6 @@ export default {
       type: Object,
       required: true
     },
-    update: { type: Function }
   },
   data () {
     return {
@@ -86,15 +85,23 @@ export default {
   methods: {
     ...mapActions({
       removerPonto: 'ponto/removerPonto',
-      setImage: 'ponto/setImage'
+      setImage: 'ponto/setImage',
+      setPontoEditar: 'ponto/setPontoEditar',
+      setStatusPainel: 'ponto/setStatusPainel'
     }),
 
     deletePonto (id) {
+      this.dialog = false
       this.removerPonto(id);
     },
 
     setObject (e) {
       this.setImage(e);
+    },
+
+    update (ponto) {
+      this.setStatusPainel(0)
+      this.setPontoEditar(ponto)
     },
 
     openMap (geolocation) {

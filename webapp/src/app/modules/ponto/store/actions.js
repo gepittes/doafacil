@@ -8,12 +8,12 @@ export const setPontoEditar = ({ commit }, pontoEditar) => {
   commit(types.SET_PONTO_EDITAR, pontoEditar);
 };
 
-export const setImage = ({ commit }, ponto) => {
-  commit(types.ATUALIZAR_PONTO_DE_DOACAO, ponto);
+export const setStatusPainel = ({ commit }, status) => {
+  commit(types.SET_STATUS_PAINEL, status);
 };
 
-export const cleanPontoEditar = ({ commit }, pontoEditar) => {
-  commit(types.CLEAN_PONTO_EDITAR, pontoEditar);
+export const setImage = ({ commit }, ponto) => {
+  commit(types.ATUALIZAR_PONTO_DE_DOACAO, ponto);
 };
 
 export const obterPontoDeDoacoes = ({ dispatch, commit }) => {

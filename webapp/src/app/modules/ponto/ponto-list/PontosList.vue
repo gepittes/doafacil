@@ -41,7 +41,7 @@
             class="mb-3"
           >
             <v-expansion-panel>
-              <v-expansion-panel-header expand-icon="fa fa-plus">Criar um ponto de doação</v-expansion-panel-header>
+              <v-expansion-panel-header expand-icon="fa fa-plus">Criar um Ponto de Coleta</v-expansion-panel-header>
               <v-expansion-panel-content>
                 <PontoFormulario :insti-selected="instiSelected" />
               </v-expansion-panel-content>
@@ -51,7 +51,7 @@
 
         <v-expansion-panels :disabled="isDisable" class="mb-3">
           <v-expansion-panel>
-            <v-expansion-panel-header>Gerenciar ponto de doação</v-expansion-panel-header>
+            <v-expansion-panel-header>Gerenciar Pontos de Coleta</v-expansion-panel-header>
             <v-expansion-panel-content>
               <v-container>
                 <v-row justify="center">

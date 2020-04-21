@@ -35,8 +35,9 @@
           <b>{{ ponto.hora_close }}</b>
         </p>
         <p class="mb-0">
-          Local:
-          <b>{{ponto.nm_cidade}} - {{ponto.sg_estado}}</b>
+          <b>Endereço:</b>
+          {{ponto.logradouro}}, {{ponto.bairro}},
+          {{ponto.complemento}}.
         </p>
       </v-card-text>
 

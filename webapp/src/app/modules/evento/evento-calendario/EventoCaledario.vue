@@ -2,44 +2,19 @@
   <v-row class="fill-height">
     <v-col>
       <v-sheet height="64">
-        <v-toolbar
-          flat
-          color="white"
-        >
-          <v-btn
-            outlined
-            class="mr-4"
-            @click="setToday"
-          >
-            Hoje
-          </v-btn>
-          <v-btn
-            fab
-            text
-            small
-            @click="prev"
-          >
+        <v-toolbar flat color="white">
+          <v-btn outlined class="mr-4" @click="setToday">Hoje</v-btn>
+          <v-btn fab text small @click="prev">
             <v-icon small>fas fa-arrow-left</v-icon>
           </v-btn>
-          <v-btn
-            fab
-            text
-            small
-            @click="next"
-          >
+          <v-btn fab text small @click="next">
             <v-icon small>fas fa-arrow-right</v-icon>
           </v-btn>
           <v-toolbar-title>{{ title }}</v-toolbar-title>
           <div class="flex-grow-1"></div>
-          <v-menu
-            bottom
-            right
-          >
+          <v-menu bottom right>
             <template v-slot:activator="{ on }">
-              <v-btn
-                outlined
-                v-on="on"
-              >
+              <v-btn outlined v-on="on">
                 <span>{{ typeToLabel[type] }}</span>
                 <v-icon small>fas fa-arrow-down</v-icon>
               </v-btn>
@@ -83,15 +58,8 @@
           :activator="selectedElement"
           offset-x
         >
-          <v-card
-            color="grey lighten-4"
-            min-width="350px"
-            flat
-          >
-            <v-toolbar
-              :color="selectedEvent.color"
-              dark
-            >
+          <v-card color="grey lighten-4" min-width="350px" flat>
+            <v-toolbar :color="selectedEvent.color" dark>
               <v-btn icon>
                 <v-icon>fa fa-paper-plane</v-icon>
               </v-btn>
@@ -107,21 +75,22 @@
             <v-card-text>
               <span v-html="selectedEvent.details"></span>
               <v-divider />
-              Hora do evento:
-              <span
-                v-html="selectedEvent.hour"
-                class="badge badge-info"
-              ></span>
-              hrs
+              <div>
+                <b class="mr-1">Hora do evento:</b>
+                <span v-html="selectedEvent.hour" class="badge badge-info"></span>
+                hrs
+              </div>
+              <div>
+                <b class="mr-1">Endereço:</b>
+                <span v-html="selectedEvent.logradouro" class="badge badge-info"></span>,
+                <span v-html="selectedEvent.bairro" class="badge badge-info"></span>,
+                <br />
+                <span v-html="selectedEvent.complemento" class="badge badge-info"></span>.
+              </div>
             </v-card-text>
             <v-card-actions>
-              <v-btn
-                text
-                color="secondary"
-                @click="selectedOpen = false"
-              >
-                Fechar
-              </v-btn>
+              <div class="flex-grow-1"></div>
+              <v-btn text color="secondary" @click="selectedOpen = false">Fechar</v-btn>
             </v-card-actions>
           </v-card>
         </v-menu>
@@ -201,6 +170,12 @@ export default {
         end: e.data,
         details: e.descricao,
         hour: e.hora,
+        bairro: e.bairro,
+        logradouro: e.logradouro,
+        complemento: e.complemento,
+        longitude: e.longitude,
+        latitude: e.latitude,
+        cep: e.cep,
         color: this.random_rgba(),
       }
       this.events.push(data)
@@ -221,6 +196,12 @@ export default {
           end: e.data,
           details: e.descricao,
           hour: e.hora,
+          bairro: e.bairro,
+          logradouro: e.logradouro,
+          complemento: e.complemento,
+          longitude: e.longitude,
+          latitude: e.latitude,
+          cep: e.cep,
           color: this.random_rgba(),
         }
         this.events.push(data)

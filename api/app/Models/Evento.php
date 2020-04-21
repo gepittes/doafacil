@@ -21,6 +21,8 @@ class Evento extends Model
         'evento.data',
         'evento.hora',
         'evento.instituicao_id',
+        'end.cidade_id',
+        'cid.estado_id',
         'end.logradouro',
         'end.bairro',
         'end.complemento',

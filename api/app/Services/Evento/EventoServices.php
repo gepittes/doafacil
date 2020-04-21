@@ -33,7 +33,9 @@ class EventoServices
             unset($data['endereco']);
             $data['endereco_id'] = $endereco->id;
 
-            return Evento::create($data);
+            $evento = Evento::create($data);
+
+            return self::get($evento->id);
         } catch (\Exception $exception) {
             throw $exception;
         }

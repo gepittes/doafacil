@@ -35,28 +35,52 @@
           </template>
 
           <v-card>
-            <v-card-title>
-              <span class="headline">{{formTitle}}</span>
-            </v-card-title>
+            <v-form ref="form" v-model="valid">
+              <v-card-title>
+                <span class="headline">{{formTitle}}</span>
+              </v-card-title>
 
-            <v-card-text>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" sm="6" md="12">
-                    <v-text-field v-model="editedItem.nome" label="Nome do Item"></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6" md="6">
-                    <v-text-field v-model="editedItem.quantidade" label="Quantidade" type="number"></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card-text>
+              <v-card-text>
+                <v-container>
+                  <v-row>
+                    <p class="ml-5 mb-0 grey--text">
+                      Em
+                      <b>Unidade de medida</b> especifique o tipo de unidade que remeta a quantidade.
+                      <b>Ex: 10 metros de Madeiras</b>
+                    </p>
+                    <v-col cols="12" sm="6" md="12">
+                      <v-text-field
+                        v-model="editedItem.nome"
+                        label="Nome do Item"
+                        :rules="[rules.required]"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="6">
+                      <v-text-field
+                        v-model="editedItem.quantidade"
+                        label="Quantidade"
+                        :rules="[rules.required]"
+                        type="number"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="6" md="6">
+                      <v-select
+                        :items="items"
+                        v-model="editedItem.unidade"
+                        :rules="[rules.required]"
+                        label="Unidade de Medida"
+                      ></v-select>
+                    </v-col>
+                  </v-row>
+                </v-container>
+              </v-card-text>
 
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close">Cancelar</v-btn>
-              <v-btn color="blue darken-1" text @click="save">Salvar</v-btn>
-            </v-card-actions>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="close">Cancelar</v-btn>
+                <v-btn color="blue darken-1" text @click="save">Salvar</v-btn>
+              </v-card-actions>
+            </v-form>
           </v-card>
         </v-dialog>
         <!-- Modal Create and Edit -->
@@ -80,6 +104,9 @@ export default {
     modal: false,
     itemModal: '',
     search: '',
+    valid: true,
+    rules: { required: (value) => !!value || 'Campo Obrigatório.' },
+    items: ['Kilos/Kg', 'Litros/L', 'Metros/M'],
     isPageManager: false,
     heads: [
       {
@@ -89,6 +116,7 @@ export default {
         value: 'nome',
       },
       { text: 'Quantidade', value: 'quantidade', sortable: true },
+      { text: 'Unidade de Medida', value: 'unidade' },
     ],
     desserts: [],
     editedIndex: -1,
@@ -154,6 +182,7 @@ export default {
 
     close () {
       this.dialog = false
+      this.$refs.form.resetValidation()
       setTimeout(() => {
         this.editedItem = Object.assign({}, this.defaultItem)
         this.editedIndex = -1
@@ -161,17 +190,20 @@ export default {
     },
 
     save () {
-      if (this.editedIndex > -1) {
-        this.updateItem(this.editedItem);
-      } else {
-        let item = {
-          nome: String(this.editedItem.nome),
-          quantidade: Number(this.editedItem.quantidade),
-          instituicao_id: Number(this.instituicao.id)
+      if (this.$refs.form.validate()) {
+        if (this.editedIndex > -1) {
+          this.updateItem(this.editedItem);
+        } else {
+          let item = {
+            nome: String(this.editedItem.nome),
+            quantidade: Number(this.editedItem.quantidade),
+            unidade: String(this.editedItem.unidade),
+            instituicao_id: Number(this.instituicao.id),
+          }
+          this.storeItem(item);
         }
-        this.storeItem(item);
+        this.close()
       }
-      this.close()
     },
   },
 }

@@ -8,7 +8,7 @@ class Item extends Model
 {
   protected $table = 'app.itens';
 
-  protected $fillable = ['nome', 'quantidade', 'instituicao_id'];
+  protected $fillable = ['nome', 'quantidade', 'unidade', 'instituicao_id'];
 
   public static function getItensByInsti($id)
   {

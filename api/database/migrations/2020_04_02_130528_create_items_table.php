@@ -17,6 +17,7 @@ class CreateItemsTable extends Migration
             $table->increments('id');
             $table->string('nome');
             $table->integer('quantidade');
+            $table->string('unidade');
             $table->unsignedBigInteger('instituicao_id');
             $table->foreign('instituicao_id')
                 ->references('id')->on('app.instituicao');

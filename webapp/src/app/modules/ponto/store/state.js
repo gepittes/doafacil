@@ -1,4 +1,5 @@
 export default {
   ponto: {},
-  pontoEditar: {}
+  pontoEditar: {},
+  statusPainel: []
 };

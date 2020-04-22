@@ -1,13 +1,11 @@
 <template>
   <v-app>
-    <v-container fluid grid-list-md>
-      <v-layout row wrap>
-        <Instituicao
-          v-for="instituicao in instituicoesIniciais"
-          :key="instituicao.id"
-          :instituicao="instituicao"
-        />
-      </v-layout>
+    <v-container>
+      <v-row>
+        <v-col xs="12" cols="4" v-for="instituicao in instituicoesIniciais" :key="instituicao.id">
+          <Instituicao :instituicao="instituicao" />
+        </v-col>
+      </v-row>
 
       <v-btn fab color="success" dark fixed bottom right @click="openDialog()">
         <v-icon>add</v-icon>
@@ -16,23 +14,26 @@
     <InstituicaoFormulario />
   </v-app>
 </template>
+
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import InstituicaoFormulario from './../instituicao-form/InstituicaoForm';
-import Instituicao from '../instituicao-card/InstituiicaoCard';
+import Instituicao from '../instituicao-card/InstituicaoCard';
 
 export default {
-  name: 'ListarInstituicoes',
+  name: 'InstituicoesList',
   components: {
     InstituicaoFormulario,
     Instituicao
   },
-  data() {
+
+  data () {
     return {
       instituicoesIniciais: [],
       instituicao: {}
     };
   },
+
   computed: {
     ...mapGetters({
       instituicoes: 'instituicao/instituicao',
@@ -40,8 +41,9 @@ export default {
       accountInfo: 'account/accountInfo'
     })
   },
+
   watch: {
-    instituicoes(value) {
+    instituicoes (value) {
       if ('error' in value) {
         this.instituicoesIniciais = {};
       } else {
@@ -50,15 +52,16 @@ export default {
     }
   },
 
-  created() {
+  created () {
     this.obterInstiUser(this.accountInfo.user_id);
   },
+
   methods: {
     ...mapActions({
       obterInstiUser: 'instituicao/obterInstiUser',
       statusDialog: 'instituicao/setDialog'
     }),
-    openDialog() {
+    openDialog () {
       this.statusDialog(true);
     }
   }

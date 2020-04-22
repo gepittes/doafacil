@@ -1,88 +1,67 @@
 <template>
-  <v-card max-width="300">
-    <imagem
-      imgHeight="100"
-      :objectId="ponto.id"
-      objectName="ponto"
-      modelImage="cover"
-      :newImage="ponto.image"
-      @setObject="setObject($event)"
-    />
-    <v-card-title v-text="ponto.nome" />
-    <v-card-text>
-      <div>{{ ponto.descricao }}</div>
-    </v-card-text>
+  <v-container>
+    <v-dialog v-model="dialog" persistent max-width="320">
+      <v-card>
+        <v-card-title class="headline text-center">Tem certeza que deseja deletar?</v-card-title>
+        <v-card-actions>
+          <div class="flex-grow-1"></div>
+          <v-btn color="green darken-1" text @click="dialog = false">Cancelar</v-btn>
+          <v-btn color="red darken-1" text @click="deletePonto(ponto.id)">Sim, quero deletar!</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
 
-    <v-divider class="mx-4 m-0" />
+    <v-card width="400" outlined>
+      <imagem
+        imgWidth="300"
+        imgHeight="100"
+        :objectId="ponto.id"
+        objectName="ponto"
+        modelImage="cover"
+        :newImage="ponto.image"
+        @setObject="setObject($event)"
+      />
+      <v-card-title v-text="ponto.nome" />
+      <v-card-text>
+        <div>{{ ponto.descricao }}</div>
+      </v-card-text>
 
-    <v-card-text>
-      <div class="title text--primary">Horário</div>
-      <p>
-        Abre <strong>{{ ponto.hora_open }}</strong> e fecha ás
-        <strong>{{ ponto.hora_close }}</strong>
-      </p>
-    </v-card-text>
+      <v-divider class="mx-4 m-0" />
 
-    <v-card-actions>
-      <v-btn
-        color="deep-purple accent-4"
-        text
-        @click="openMap"
-      >
-        <v-icon>fa fa-map-marker-alt mr-2</v-icon>
-        Mapa do local
-      </v-btn>
-      <v-spacer />
-      <v-btn
-        icon
-        v-if="this.$route.name === `pontos`"
-        @click="update(ponto)"
-      >
-        <v-icon>
-          edit
-        </v-icon>
-      </v-btn>
+      <v-card-text>
+        <p class="mb-0">
+          Abre ás
+          <b>{{ ponto.hora_open }}</b> e fecha ás
+          <b>{{ ponto.hora_close }}</b>
+        </p>
+        <p class="mb-0">
+          <b>Endereço:</b>
+          {{ponto.logradouro}}, {{ponto.bairro}},
+          {{ponto.complemento}}.
+        </p>
+      </v-card-text>
 
-      <v-dialog
-        v-model="dialog"
-        v-if="this.$route.name === `pontos`"
-        persistent
-        max-width="290"
-      >
-        <template v-slot:activator="{ on }">
-          <v-btn
-            icon
-            v-on="on"
-          >
-            <v-icon>
-              delete
-            </v-icon>
+      <v-divider class="mx-4 m-0" />
+
+      <v-card-actions>
+        <v-row justify="center">
+          <v-btn color="deep-purple accent-4" text @click="openMap(ponto)">
+            <v-icon>fa fa-map-marker-alt mr-2</v-icon>Mapa do local
           </v-btn>
-        </template>
-        <v-card>
-          <v-card-title class="headline">Excluir o ponto!</v-card-title>
-          <v-card-text>Seu ponto será excluido permanente você deseja realmente
-            continuar?</v-card-text>
-          <v-card-actions>
-            <v-btn
-              color="blue-grey"
-              class="ma-2 white--text"
-              @click="dialog = false"
-            ><i class="fas fa-window-close mr-1" /> Não
-            </v-btn>
-            <v-spacer />
-            <v-btn
-              class="ma-2 white--text"
-              color="error"
-              @click="deletePonto()"
-            >
-              <v-icon>delete</v-icon> Sim
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-card-actions>
-  </v-card>
+        </v-row>
+      </v-card-actions>
+
+      <v-card-actions>
+        <div class="flex-grow-1"></div>
+        <v-btn icon v-if="this.$route.name === `pontos`" @click="update(ponto)">
+          <v-icon>edit</v-icon>
+        </v-btn>
+        <v-btn icon v-if="this.$route.name === `pontos`" @click="dialog = true">
+          <v-icon>delete</v-icon>
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
@@ -97,7 +76,6 @@ export default {
       type: Object,
       required: true
     },
-    update: { type: Function }
   },
   data () {
     return {
@@ -108,21 +86,27 @@ export default {
   methods: {
     ...mapActions({
       removerPonto: 'ponto/removerPonto',
-      setImage: 'ponto/setImage'
+      setImage: 'ponto/setImage',
+      setPontoEditar: 'ponto/setPontoEditar',
+      setStatusPainel: 'ponto/setStatusPainel'
     }),
 
-    deletePonto () {
-      this.dialog = !this.dialog;
-      this.removerPonto(this.ponto.id);
+    deletePonto (id) {
+      this.dialog = false
+      this.removerPonto(id);
     },
+
     setObject (e) {
       this.setImage(e);
     },
-    // update(ponto) {
-    //   this.$emit("closePainel", []);
-    // },
-    openMap () {
-      //
+
+    update (ponto) {
+      this.setStatusPainel(0)
+      this.setPontoEditar(ponto)
+    },
+
+    openMap (geolocation) {
+      window.open(`https://www.google.com/maps/search/${geolocation.cep}/@${geolocation.longitude},${geolocation.latitude}`)
     }
   }
 };

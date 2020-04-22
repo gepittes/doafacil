@@ -51,7 +51,7 @@
             <v-expansion-panel>
               <v-expansion-panel-header expand-icon="fa fa-plus">Criação de Evento</v-expansion-panel-header>
               <v-expansion-panel-content>
-                <EventoFormulario :instituicao-select="ObjInstiSelect" />
+                <EventoFormulario :insti-selected="ObjInstiSelect" />
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-expansion-panels>

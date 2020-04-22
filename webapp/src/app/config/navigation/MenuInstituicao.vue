@@ -48,12 +48,10 @@ export default {
       items: [
         { icon: 'fa fa-home', text: 'Inicio', to: '/main' },
         { icon: 'fa fa-stream', text: 'Minhas Instituições', to: '/instituicoes' },
-        { icon: 'fa fa-map', text: 'Ponto de Doação', to: '/pontos' },
+        { icon: 'fa fa-map', text: 'Pontos de Coleta', to: '/pontos' },
+        { icon: 'fa fa-list-alt', text: 'Itens para Doação', to: '/itens' },
         { icon: 'fa fa-calendar-alt', text: 'Eventos', to: '/eventos' },
-        { icon: 'fa fa-list-alt', text: 'Itens', to: '/itens' },
         { icon: 'fa fa-cog', text: 'Configuração', to: '/configuracao' },
-        { icon: 'fa fa-comment-alt', text: 'Enviar feedback' },
-        { icon: 'fa fa-question-circle', text: 'Ajuda' }
       ],
     }
   },

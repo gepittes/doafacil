@@ -17,8 +17,8 @@
             <v-chip color="green darken-1" label class="mr-3 mt-2">
               <v-icon left color="white">fa fa-home</v-icon>
               <h3 class="mt-1 white--text">
-                Localidade: {{ instituicao.localidade }} -
-                {{ instituicao.uf }}
+                Localidade: {{ instituicao.nm_cidade }} -
+                {{ instituicao.sg_estado }}
               </h3>
             </v-chip>
             <v-chip color="purple darken-1" label class="mt-2">
@@ -35,12 +35,12 @@
                 <v-tabs-slider />
 
                 <v-tab href="#tab-1">
-                  Itens para Instituição
+                  Itens para Doação
                   <v-icon>fa fa-list</v-icon>
                 </v-tab>
 
                 <v-tab href="#tab-2">
-                  Pontos de Doação
+                  Pontos de Coleta
                   <v-icon>favorite</v-icon>
                 </v-tab>
 
@@ -70,29 +70,24 @@
                 </v-tab-item>
 
                 <v-tab-item value="tab-2">
-                  <v-row justify="center" align="center">
-                    <v-col xl="3" md="5" lg="4" cols="12" v-for="ponto in pontos" :key="ponto.id">
-                      <div class="ma-5">
-                        <PontoCard :ponto="ponto" />
-                      </div>
+                  <v-row justify="center" align="center" v-if="pontos.length">
+                    <v-col xl="3" md="4" v-for="ponto in pontos" :key="ponto.id">
+                      <PontoCard :ponto="ponto" />
                     </v-col>
+                  </v-row>
+                  <v-row justify="center" align="center" style="height: 300px" v-else>
+                    <p>Está instituição não possui pontos de coleta no momento.</p>
                   </v-row>
                 </v-tab-item>
 
                 <v-tab-item value="tab-3">
-                  <v-row justify="center" align="center">
-                    <v-col
-                      xl="3"
-                      md="5"
-                      lg="4"
-                      cols="12"
-                      v-for="evento in eventos"
-                      :key="evento.id"
-                    >
-                      <div class="ma-5">
-                        <EventoCard :evento="evento" />
-                      </div>
+                  <v-row justify="center" align="center" v-if="eventos.length">
+                    <v-col xl="3" md="4" v-for="evento in eventos" :key="evento.id">
+                      <EventoCard :evento="evento" />
                     </v-col>
+                  </v-row>
+                  <v-row justify="center" align="center" style="height: 300px" v-else>
+                    <p>Está instituição não possui eventos no momento.</p>
                   </v-row>
                 </v-tab-item>
               </v-tabs-items>
@@ -111,7 +106,7 @@ import PontoCard from '../../ponto/ponto-card/PontoCard';
 import DatatableItens from '@/app/modules/item/datatable-itens/DatatableItens.vue'
 
 export default {
-  name: 'Perfil',
+  name: 'InstituicaoPerfil',
   components: { EventoCard, PontoCard, DatatableItens },
 
   data () {
@@ -131,8 +126,7 @@ export default {
   },
 
   created () {
-    this.obterInstituicoes();
-    this.buscarInstituicoe(this.$route.params.id);
+    this.buscarInsituicao(this.$route.params.id);
     this.obterEventosInstiuicao(this.$route.params.id);
     this.getPontoByInst(this.$route.params.id);
     this.getItensInstituicao(this.$route.params.id)
@@ -140,8 +134,7 @@ export default {
 
   methods: {
     ...mapActions({
-      obterInstituicoes: 'instituicao/obterInstituicoes',
-      buscarInstituicoe: 'instituicao/buscartInstituicao',
+      buscarInsituicao: 'instituicao/buscartInstituicao',
       obterEventosInstiuicao: 'evento/obterEventosInstiuicao',
       getPontoByInst: 'ponto/getPontoByInst',
       getItensInstituicao: 'item/getItensInstituicao'

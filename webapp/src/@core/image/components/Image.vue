@@ -1,15 +1,17 @@
 <template>
-  <v-card class="mx-auto" max-width="400">
+  <v-card class="mx-auto" max-width="400" flat>
     <!-- <v-img class="white--text align-end" :height="imgHeight" :src="imagPath"> -->
     <v-card-title mt-0>
       <v-row class="file">
-        <v-btn small color="primary"><v-icon>fa fa-camera</v-icon></v-btn>
+        <v-btn small color="primary">
+          <i class="fa fa-lg fa-camera" />
+        </v-btn>
         <input type="file" v-on:change="onFileChange($event)" />
       </v-row>
       <v-row class="save" v-if="isFile">
-        <v-btn small color="success" @click="upload()"
-          ><v-icon>fa fa-save</v-icon></v-btn
-        >
+        <v-btn small color="success" @click="upload()">
+          <v-icon>fa fa-save</v-icon>
+        </v-btn>
       </v-row>
     </v-card-title>
     <!-- </v-img> -->
@@ -40,7 +42,7 @@ export default {
     }
   },
 
-  data() {
+  data () {
     return {
       image: `https://via.placeholder.com/${this.imgWidth}x${this.imgHeight}`,
       isFile: false
@@ -50,7 +52,7 @@ export default {
     ...mapGetters({
       object: 'image/object'
     }),
-    styled() {
+    styled () {
       return {
         height: `${this.imgHeight}px`,
         width: `${this.imgWidth}px`,
@@ -65,7 +67,7 @@ export default {
     // }
   },
   watch: {
-    object(value) {
+    object (value) {
       this.$emit('setObject', value);
     }
   },
@@ -73,13 +75,13 @@ export default {
     ...mapActions({
       uploadImage: 'image/uploadImage'
     }),
-    onFileChange(e) {
+    onFileChange (e) {
       this.isFile = true;
       let files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
       this.createImage(files[0]);
     },
-    createImage(file) {
+    createImage (file) {
       let reader = new FileReader();
       let vm = this;
       reader.onload = (e) => {
@@ -88,7 +90,7 @@ export default {
       reader.readAsDataURL(file);
     },
 
-    upload() {
+    upload () {
       const data = {
         image: this.image,
         objectId: this.objectId,

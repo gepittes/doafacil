@@ -1,10 +1,9 @@
 <template>
-  <div>
+  <v-container>
     <v-row justify="center">
       <v-dialog v-model="dialog" persistent max-width="320">
         <v-card>
           <v-card-title class="headline text-center">Tem certeza que deseja deletar este evento?</v-card-title>
-          <v-card-text>Você esta prestes a deletar o evento {{ evento.nome }}</v-card-text>
           <v-card-actions>
             <div class="flex-grow-1"></div>
             <v-btn color="green darken-1" text @click="dialog = false">Cancelar</v-btn>
@@ -13,7 +12,7 @@
         </v-card>
       </v-dialog>
     </v-row>
-    <v-card max-width="300">
+    <v-card max-width="400" outlined>
       <imagem
         imgWidth="300"
         imgHeight="100"
@@ -29,22 +28,35 @@
         <div>{{ evento.descricao }}</div>
       </v-card-text>
 
-      <v-divider class="mx-4 m-0"></v-divider>
+      <v-divider class="mx-4 m-0" />
 
       <v-card-text>
-        <div class="title text--primary">Data e Hora do Evento</div>
-        <v-chip color="green mr-3">
-          <b class="white--text">{{ evento.data }}</b>
-        </v-chip>
-        <v-chip color="blue">
-          <b class="white--text">{{ evento.hora }} hrs</b>
-        </v-chip>
+        <v-row justify="center">
+          <v-chip class="mb-0" color="green" dark>
+            <span>
+              <b>{{evento.data}}</b> ás
+              <b>{{evento.hora}} hrs</b>
+            </span>
+          </v-chip>
+          <p class="ma-2 text-center mb-0">
+            <b>Endereço:</b>
+            {{evento.logradouro}}, {{evento.bairro}},
+            {{evento.complemento}}
+          </p>
+        </v-row>
       </v-card-text>
 
+      <v-divider class="mx-4 m-0" />
+
       <v-card-actions>
-        <v-btn color="deep-purple accent-4" text @click="openMap">
-          <v-icon>fa fa-map-marker-alt mr-2</v-icon>Mapa do local
-        </v-btn>
+        <v-row justify="center">
+          <v-btn color="deep-purple accent-4" text @click="openMap(evento)">
+            <v-icon>fa fa-map-marker-alt mr-2</v-icon>Mapa do local
+          </v-btn>
+        </v-row>
+      </v-card-actions>
+
+      <v-card-actions>
         <v-spacer />
         <v-btn v-if="this.$route.name === `eventos`" icon @click="editarEvento(evento)">
           <v-icon>edit</v-icon>
@@ -54,7 +66,7 @@
         </v-btn>
       </v-card-actions>
     </v-card>
-  </div>
+  </v-container>
 </template>
 
 
@@ -79,6 +91,7 @@ export default {
       visibleCreatePnlEvento: 'evento/visibleCreatePnlEvento',
       setImage: 'evento/setImage'
     }),
+
     editarEvento (evento) {
       this.visibleCreatePnlEvento(true);
       this.statusPnlCreate(0);
@@ -86,9 +99,11 @@ export default {
         this.eventoEditar(evento);
       }, 800);
     },
-    openMap () {
-      //open Map event here!
+
+    openMap (geolocation) {
+      window.open(`https://www.google.com/maps/search/${geolocation.cep}/@${geolocation.longitude},${geolocation.latitude}`)
     },
+
     setObject (e) {
       this.setImage(e);
     }

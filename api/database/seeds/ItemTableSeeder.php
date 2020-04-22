@@ -18,6 +18,7 @@ class ItemTableSeeder extends Seeder
             Item::create([
                 'nome' => 'ItemSeeder(' . $i . ')',
                 'quantidade' => 5 + $i,
+                'unidade' => 'Kilos/Kg',
                 'instituicao_id' => 1
             ]);
             $i++;

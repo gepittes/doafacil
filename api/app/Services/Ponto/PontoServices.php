@@ -33,7 +33,9 @@ class PontoServices
             unset($data['endereco']);
             $data['endereco_id'] = $endereco->id;
 
-            return PontoDeDoacao::create($data);
+            $ponto = PontoDeDoacao::create($data);
+
+            return self::get($ponto->id);
         } catch (\Exception $exception) {
             throw $exception;
         }

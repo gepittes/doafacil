@@ -4,7 +4,6 @@
 
 ## Sumary (Sumário)
 
-- [Previews's](#)
 - [Como Instalar e usar](#how-to-install-and-use-como-instalar-e-usar)
 - [Fluxo da Aplicação](#fluxo-da-apliacação)
 - [Estrutura de Diretórios WebApp](#estrutura-de-diretórios-webapp)
@@ -12,9 +11,22 @@
 - [Como nomear end-points REST](#how-to-name-end-point-rest-como-nomear-end-points-rest)
 - [Como nomear métodos na API](#how-to-name-methods-in-api)
 - [Como nomear FK em tabelas](#how-name-structure-table-foreign-key-como-nomear-fk-de-tabelas)
-- [Modelagem do Banco de Dados](#)
 
 <hr>
+
+## Dependências
+ - PHP 7.2
+ - Composer
+ 
+ 
+## Instalando PHP 7.2
+
+```
+$ sudo add-apt-repository ppa:ondrej/php
+$ sudo apt update
+$ sudo apt install php7.2
+$ sudo apt install php7.2-curl php7.2-gd php7.2-json php7.2-mbstring php7.2-xml
+```
 
 ## How to install and use (Como Instalar e usar)
 
